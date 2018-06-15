@@ -27,7 +27,7 @@ public class DailyTripController {
 	@Autowired
 	DailyTripDetailsService dailyTripDetailsService;
 
-   /* @GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<DailyTripDetailsBean> getDailyTripDetailsBeanById(@PathVariable("id") int id) {
         System.out.println("Fetching DailyTripDetailsBean with id " + id);
         DailyTripDetailsBean DailyTripDetailsBean = dailyTripDetailsService.findById(id);
@@ -83,5 +83,5 @@ public class DailyTripController {
 		}
 		DailyTripDetailsBean usr =	dailyTripDetailsService.updatePartially(currentDailyTripDetailsBean, id);
 		return new ResponseEntity<DailyTripDetailsBean>(usr, HttpStatus.OK);
-	}*/
+	}
 }
