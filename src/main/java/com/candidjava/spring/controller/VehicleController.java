@@ -24,7 +24,7 @@ import com.candidjava.spring.service.VehicleDetailsService;
 @RestController
 @RequestMapping(value={"/vehicledetails"})
 public class VehicleController {
-	/*@Autowired
+	@Autowired
 	VehicleDetailsService VehicleDetailsService;
 
     @GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
@@ -83,5 +83,5 @@ public class VehicleController {
 		}
 		VehicleDetailsBean usr =	VehicleDetailsService.updatePartially(currentVehicleDetailsBean, id);
 		return new ResponseEntity<VehicleDetailsBean>(usr, HttpStatus.OK);
-	}*/
+	}
 }
