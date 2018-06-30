@@ -1,0 +1,155 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>Spring Boot Thymeleaf Hello World Example</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+<link rel="stylesheet" type="text/css"
+	href="webjars/bootstrap/3.3.7/css/bootstrap.min.css" />
+
+<link rel="stylesheet" th:href="@{/css/main.css}"
+	href="../../css/main.css" />
+
+</head>
+<body>
+
+	<nav class="navbar navbar-inverse">
+		<div class="container">
+			<div class="navbar-header">
+				<a class="navbar-brand" href="#">Spring Boot</a>
+			</div>
+			<div id="navbar" class="collapse navbar-collapse">
+				<ul class="nav navbar-nav">
+					<li class="active"><a href="#">Home</a></li>
+					<li><a href="#about">About</a></li>
+				</ul>
+			</div>
+		</div>
+	</nav>
+
+	<div class="container">
+
+		<div class="starter-template">
+			<h1>Driver Information</h1>
+		</div>
+
+	</div>
+	<!-- /.container -->
+		<h1 th:text="#{app.create-user}">Create</h1>
+	    <form action="#" th:action="@{/driverdetails/create-user}" th:object="${driverDetailsBean}" method="POST">
+	      <table>
+	    	<tr><td th:text="#{drivery.licance.number}"></td>
+	    	    <td>
+	    	       <input type="text" th:field="*{driveryLicanceNumber}" />
+	    	       <label th:if="${#fields.hasErrors('driveryLicanceNumber')}" th:text="#{error.}" th:class="'error'">Id Error</label>
+	    	    </td>
+	    	</tr>
+	    	<tr><td th:text="#{driver.name}"></td>
+	    	    <td>
+	    	      <input type="text" th:field="*{driverName}" />
+	    	      <label th:if="${#fields.hasErrors('driverName')}" th:text="#{error.}" th:class="'error'">Name Error</label>
+	    	    </td>
+	    	</tr>
+	    	<tr><td th:text="#{address}"></td>
+	    	    <td>
+	    	       <input type="text" th:field="*{address}" />
+	    	       <label th:if="${#fields.hasErrors('address')}" th:text="#{error.}" th:class="'error'">Id Error</label>
+	    	    </td>
+	    	</tr>
+	    	<tr><td th:text="#{contact.number}"></td>
+	    	    <td>
+	    	      <input type="text" th:field="*{contactNumber}" />
+	    	      <label th:if="${#fields.hasErrors('contactNumber')}" th:text="#{error.}" th:class="'error'">Name Error</label>
+	    	    </td>
+	    	</tr>
+	    	<tr><td th:text="#{alternate.contact.number}"></td>
+	    	    <td>
+	    	       <input type="text" th:field="*{alternateContactNumber}" />
+	    	       <label th:if="${#fields.hasErrors('alternateContactNumber')}" th:text="#{error.}" th:class="'error'">Id Error</label>
+	    	    </td>
+	    	</tr>
+	    	<tr><td th:text="#{voter.id.number}"></td>
+	    	    <td>
+	    	      <input type="text" th:field="*{voterIdNumber}" />
+	    	      <label th:if="${#fields.hasErrors('voterIdNumber')}" th:text="#{error.}" th:class="'error'">Name Error</label>
+	    	    </td>
+	    	</tr>
+	    	<tr><td th:text="#{adhar.number}"></td>
+	    	    <td>
+	    	       <input type="text" th:field="*{adharNumber}" />
+	    	       <label th:if="${#fields.hasErrors('adharNumber')}" th:text="#{error.}" th:class="'error'">Id Error</label>
+	    	    </td>
+	    	</tr>
+	    	<tr><td th:text="#{dl.scaned.copy}"></td>
+	    	    <td>
+	    	       <input type="text" th:field="*{dlScanedCopy}" />
+	    	       <label th:if="${#fields.hasErrors('dlScanedCopy')}" th:text="#{error.}" th:class="'error'">Id Error</label>
+	    	    </td>
+	    	</tr>
+	    	<tr><td th:text="#{voter.scaned.copy}"></td>
+	    	    <td>
+	    	      <input type="text" th:field="*{voterScanedCopy}" />
+	    	      <label th:if="${#fields.hasErrors('voterScanedCopy')}" th:text="#{error.}" th:class="'error'">Name Error</label>
+	    	    </td>
+	    	</tr>
+	    	  	<tr><td th:text="#{adhar.scaned.copy}"></td>
+	    	    <td>
+	    	       <input type="text" th:field="*{adharScanedCopy}" />
+	    	       <label th:if="${#fields.hasErrors('adharScanedCopy')}" th:text="#{error.}" th:class="'error'">Id Error</label>
+	    	    </td>
+	    	</tr>
+	    	<tr><td th:text="#{driver.photo.copy}"></td>
+	    	    <td>
+	    	      <input type="text" th:field="*{driverPhotoCopy}" />
+	    	      <label th:if="${#fields.hasErrors('driverPhotoCopy')}" th:text="#{error.}" th:class="'error'">Name Error</label>
+	    	    </td>
+	    	</tr>
+ 		    	<tr><td th:text="#{year.of.experience}"></td>
+	    	    <td>
+	    	       <input type="text" th:field="*{yearsOfExperience}" />
+	    	       <label th:if="${#fields.hasErrors('yearsOfExperience')}" th:text="#{error.}" th:class="'error'">Id Error</label>
+	    	    </td>
+	    	</tr>
+	    	<tr><td th:text="#{previously.worked.at}"></td>
+	    	    <td>
+	    	      <input type="text" th:field="*{previouslyWorkedAt}" />
+	    	      <label th:if="${#fields.hasErrors('previouslyWorkedAt')}" th:text="#{error.}" th:class="'error'">Name Error</label>
+	    	    </td>
+	    	</tr>
+	    	  	<tr><td th:text="#{description}"></td>
+	    	    <td>
+	    	       <input type="text" th:field="*{description}" />
+	    	       <label th:if="${#fields.hasErrors('description')}" th:text="#{error.}" th:class="'error'">Id Error</label>
+	    	    </td>
+	    	</tr>
+	    	<!-- <tr><td th:text="#{user.gender}"></td>
+	    	   <td>
+	    	       <input type="radio" th:field="*{gender}" value="Male"/><label th:text="#{user.gender.male}">M</label>
+	    	       <input type="radio" th:field="*{gender}" value="Female"/><label th:text="#{user.gender.female}">F</label>
+	    	       <label th:if="${#fields.hasErrors('gender')}" th:text="#{error.user.gender}" th:class="'error'">Gender Error</label>
+	    	   </td>
+	    	</tr>
+	    	<tr><td th:text="#{user.married}+ '?'"></td>
+	    	   <td>
+	    	       <input type="checkbox" th:field="*{married}" />
+	    	   </td>
+	    	</tr>	    	
+	    	<tr><td th:text="#{user.profile}"></td>
+	    	   <td>
+	    	       <select th:field="*{profile}">
+	    	          <option th:each="profile : ${allProfiles}" th:value="${profile}" th:text="${profile}">Profile</option>
+	    	       </select>
+	    	   </td>
+	    	</tr>	-->    		    	
+	        <tr><td colspan="2">
+	              <input type="submit" th:value="#{user.form.submit}"/> 
+	              <input type="reset" th:value="#{user.form.reset}"/>
+	            </td>
+	        </tr> 
+	      </table>  
+	    </form>
+	<script type="text/javascript"
+		src="webjars/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+</body>
+</html>

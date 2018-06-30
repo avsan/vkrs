@@ -1,0 +1,111 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>Spring Boot Thymeleaf Hello World Example</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+<link rel="stylesheet" type="text/css"
+	href="../webjars/bootstrap/3.3.7/css/bootstrap.min.css" />
+
+<link rel="stylesheet" th:href="@{/css/main.css}"
+	href="../../css/main.css" />
+	
+	
+<script>
+function upload(vehicle) {
+  alert("Abhishek  "+vehicle);
+}
+</script>
+
+</head>
+<body>
+
+	<nav class="navbar navbar-inverse">
+		<div class="container">
+			<div class="navbar-header">
+				<a class="navbar-brand" href="#">Spring Boot</a>
+			</div>
+			<div id="navbar" class="collapse navbar-collapse">
+				<ul class="nav navbar-nav">
+					<li class="active"><a href="#">Home</a></li>
+					<li><a href="#about">About</a></li>
+				</ul>
+			</div>
+		</div>
+	</nav>
+
+	<div class="container">
+
+		<div class="starter-template">
+			<h1>Vehicle Information</h1>
+		</div>
+
+	</div>
+
+<table class="table table-bordered">
+<thead>
+	      <tr>
+	      	<th th:text="#{vehicle.pr.number}"></th>
+			<th th:text="#{name.of.owner}"></th>
+			<th th:text="#{chesis.number}"></th>
+			<th th:text="#{engine.number}"></th>
+			<th th:text="#{cubic.capacity}"></th>
+			<th th:text="#{full.weight.capacity}"></th>
+			<th th:text="#{unloaded.weight}"></th>
+			<th th:text="#{oil.tank.capacity}"></th>
+			<th th:text="#{vehicle.color}"></th>
+			<th th:text="#{date.of.registration}"></th>
+			<th th:text="#{registration.valid.upto}"></th>
+			<th th:text="#{payed.tax}"></th>
+			<th th:text="#{company.warranty.details}"></th>
+			<th th:text="#{warranty.valid.upto}"></th>
+			<th th:text="#{description}"></th>
+
+	    	</tr>
+	    	</thead>
+	    	<tbody>
+	    		<tr  th:each="vehicle : ${vehicleDetails}">
+	    	       <td th:text="${vehicle.vehiclePrNumber}" ></td>
+	    	
+	    	      <td th:text="${vehicle.nameOfOwner}" ></td>
+	 
+	    	       <td th:text="${vehicle.chesisNumber}" />
+	    	      
+	    	      <td th:text="${vehicle.engineNumber}" />
+	    	      
+	    	       <td th:text="${vehicle.cubicCapacity}" />
+	    	     
+	    	      <td th:text="${vehicle.fullWeightCapacity}" />
+	    	      
+	    	       <td th:text="${vehicle.unloadedWeight}" />
+	    	       
+	    	      <td th:text="${vehicle.oilTankCapacity}" />
+	    	      <td th:text="${vehicle.vehicleColor}" />
+	    	   
+	    	      <td th:text="${vehicle.dateOfRegistration}" />
+	    	     
+	    	       <td th:text="${vehicle.registrationValidupto}" />
+	    	      
+	    	      <td th:text="${vehicle.payedTax}" />
+	    	     
+	    	       <td th:text="${vehicle.companyWarrantyDetails}" />
+	    	      
+	    	      <td th:text="${vehicle.warrantyValidUpTo}" />
+	    	      
+	    	       <td th:text="${vehicle.description}" />
+	    	       <td><button th:onclick="@{/vehicledetails/addVehicle}">Click</button>  </td>
+	              <td><button th:onclick="'javascript:upload(\''+ ${vehicle} +'\');'">Click</button>  </td>
+	              <td><input type="submit" th:value="#{user.form.submit}"/> 
+	              <a href="/vehicledetails/addVehicle">Home</a>
+	              
+	                </td>
+	          
+	        </tr> 
+	        
+	        </tbody>
+	      </table>  
+	<script type="text/javascript"
+		src="../webjars/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+</body>
+</html>

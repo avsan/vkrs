@@ -1,0 +1,161 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>Spring Boot Thymeleaf Hello World Example</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+<link rel="stylesheet" type="text/css"
+	href="../webjars/bootstrap/3.3.7/css/bootstrap.min.css" />
+
+<link rel="stylesheet" th:href="@{/css/main.css}"
+	href="../../css/main.css" />
+
+</head>
+<body>
+
+	<nav class="navbar navbar-inverse">
+		<div class="container">
+			<div class="navbar-header">
+				<a class="navbar-brand" href="#">Spring Boot</a>
+			</div>
+			<div id="navbar" class="collapse navbar-collapse">
+				<ul class="nav navbar-nav">
+					<li class="active"><a href="#">Home</a></li>
+					<li><a href="#about">About</a></li>
+				</ul>
+			</div>
+		</div>
+	</nav>
+
+	<div class="container">
+
+		<div class="starter-template">
+			<h1>Vehicle Information</h1>
+		</div>
+
+	</div>
+	<!-- /.container -->
+		<h1 th:text="#{app.create-user}">Create</h1>
+	    <form action="#" th:action="@{/vehicledetails/addVehicle}" th:object="${vehicleDetailsBean}" method="POST">
+	      <table>
+	    	<tr><td th:text="#{vehicle.pr.number}"></td>
+	    	    <td>
+	    	       <input type="text" th:field="*{vehiclePrNumber}" />
+	    	       <label th:if="${#fields.hasErrors('vehiclePrNumber')}" th:text="#{error.}" th:class="'error'">Id Error</label>
+	    	    </td>
+	    	</tr>
+	    	<tr><td th:text="#{name.of.owner}"></td>
+	    	    <td>
+	    	      <input type="text" th:field="*{nameOfOwner}" />
+	    	      <label th:if="${#fields.hasErrors('nameOfOwner')}" th:text="#{error.}" th:class="'error'">Name Error</label>
+	    	    </td>
+	    	</tr>
+	    	<tr><td th:text="#{chesis.number}"></td>
+	    	    <td>
+	    	       <input type="text" th:field="*{chesisNumber}" />
+	    	       <label th:if="${#fields.hasErrors('chesisNumber')}" th:text="#{error.}" th:class="'error'">Id Error</label>
+	    	    </td>
+	    	</tr>
+	    	<tr><td th:text="#{engine.number}"></td>
+	    	    <td>
+	    	      <input type="text" th:field="*{engineNumber}" />
+	    	      <label th:if="${#fields.hasErrors('engineNumber')}" th:text="#{error.}" th:class="'error'">Name Error</label>
+	    	    </td>
+	    	</tr>
+	    	<tr><td th:text="#{cubic.capacity}"></td>
+	    	    <td>
+	    	       <input type="text" th:field="*{cubicCapacity}" />
+	    	       <label th:if="${#fields.hasErrors('cubicCapacity')}" th:text="#{error.}" th:class="'error'">Id Error</label>
+	    	    </td>
+	    	</tr>
+	    	<tr><td th:text="#{full.weight.capacity}"></td>
+	    	    <td>
+	    	      <input type="text" th:field="*{fullWeightCapacity}" />
+	    	      <label th:if="${#fields.hasErrors('fullWeightCapacity')}" th:text="#{error.}" th:class="'error'">Name Error</label>
+	    	    </td>
+	    	</tr>
+	    	<tr><td th:text="#{unloaded.weight}"></td>
+	    	    <td>
+	    	       <input type="text" th:field="*{unloadedWeight}" />
+	    	       <label th:if="${#fields.hasErrors('unloadedWeight')}" th:text="#{error.}" th:class="'error'">Id Error</label>
+	    	    </td>
+	    	</tr>
+	    	<tr><td th:text="#{oil.tank.capacity}"></td>
+	    	    <td>
+	    	      <input type="text" th:field="*{oilTankCapacity}" />
+	    	      <label th:if="${#fields.hasErrors('oilTankCapacity')}" th:text="#{error.}" th:class="'error'">Name Error</label>
+	    	    </td>
+	    	</tr>
+	    	<tr><td th:text="#{vehicle.color}"></td>
+	    	    <td>
+	    	       <input type="text" th:field="*{vehicleColor}" />
+	    	       <label th:if="${#fields.hasErrors('vehicleColor')}" th:text="#{error.}" th:class="'error'">Id Error</label>
+	    	    </td>
+	    	</tr>
+	    	<tr><td th:text="#{date.of.registration}"></td>
+	    	    <td>
+	    	      <input type="date" th:field="*{dateOfRegistration}" />
+	    	      <label th:if="${#fields.hasErrors('dateOfRegistration')}" th:text="#{error.}" th:class="'error'">Name Error</label>
+	    	    </td>
+	    	</tr>
+	    	  	<tr><td th:text="#{registration.valid.upto}"></td>
+	    	    <td>
+	    	       <input type="date" th:field="*{registrationValidupto}" />
+	    	       <label th:if="${#fields.hasErrors('registrationValidupto')}" th:text="#{error.}" th:class="'error'">Id Error</label>
+	    	    </td>
+	    	</tr>
+	    	<tr><td th:text="#{payed.tax}"></td>
+	    	    <td>
+	    	      <input type="text" th:field="*{payedTax}" />
+	    	      <label th:if="${#fields.hasErrors('payedTax')}" th:text="#{error.}" th:class="'error'">Name Error</label>
+	    	    </td>
+	    	</tr>
+	    		    	<tr><td th:text="#{company.warranty.details}"></td>
+	    	    <td>
+	    	       <input type="text" th:field="*{companyWarrantyDetails}" />
+	    	       <label th:if="${#fields.hasErrors('companyWarrantyDetails')}" th:text="#{error.}" th:class="'error'">Id Error</label>
+	    	    </td>
+	    	</tr>
+	    	<tr><td th:text="#{warranty.valid.upto}"></td>
+	    	    <td>
+	    	      <input type="date" th:field="*{warrantyValidUpTo}" />
+	    	      <label th:if="${#fields.hasErrors('warrantyValidUpTo')}" th:text="#{error.}" th:class="'error'">Name Error</label>
+	    	    </td>
+	    	</tr>
+	    	  	<tr><td th:text="#{description}"></td>
+	    	    <td>
+	    	       <input type="text" th:field="*{description}" />
+	    	       <label th:if="${#fields.hasErrors('description')}" th:text="#{error.}" th:class="'error'">Id Error</label>
+	    	    </td>
+	    	</tr>
+	    	<!-- <tr><td th:text="#{user.gender}"></td>
+	    	   <td>
+	    	       <input type="radio" th:field="*{gender}" value="Male"/><label th:text="#{user.gender.male}">M</label>
+	    	       <input type="radio" th:field="*{gender}" value="Female"/><label th:text="#{user.gender.female}">F</label>
+	    	       <label th:if="${#fields.hasErrors('gender')}" th:text="#{error.user.gender}" th:class="'error'">Gender Error</label>
+	    	   </td>
+	    	</tr>
+	    	<tr><td th:text="#{user.married}+ '?'"></td>
+	    	   <td>
+	    	       <input type="checkbox" th:field="*{married}" />
+	    	   </td>
+	    	</tr>	    	
+	    	<tr><td th:text="#{user.profile}"></td>
+	    	   <td>
+	    	       <select th:field="*{profile}">
+	    	          <option th:each="profile : ${allProfiles}" th:value="${profile}" th:text="${profile}">Profile</option>
+	    	       </select>
+	    	   </td>
+	    	</tr>	-->    		    	
+	        <tr><td colspan="2">
+	              <input type="submit" th:value="#{user.form.submit}"/> 
+	              <input type="reset" th:value="#{user.form.reset}"/>
+	            </td>
+	        </tr> 
+	      </table>  
+	    </form>
+	<script type="text/javascript"
+		src="../webjars/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+</body>
+</html>
