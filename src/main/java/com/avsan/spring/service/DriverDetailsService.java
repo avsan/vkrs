@@ -3,12 +3,13 @@ package com.avsan.spring.service;
 import java.util.List;
 
 import com.avsan.spring.bean.DriverDetailsBean;
+import com.avsan.spring.pojo.DriverDetailsPojo;
 
 public interface DriverDetailsService {
-	public void createDriverDetails(DriverDetailsBean driverDetails);
-	public List<DriverDetailsBean> getDriverDetails();
-	public DriverDetailsBean findById(int id);
-	public DriverDetailsBean update(DriverDetailsBean driverDetails, int id);
+	public void createDriverDetails(DriverDetailsPojo driverDetails);
+	public List<DriverDetailsPojo> getDriverDetails();
+	public DriverDetailsPojo findById(int id);
+	public DriverDetailsPojo update(DriverDetailsPojo driverDetails, int id);
 	public void deleteDriverDetailsById(int id);
-	public DriverDetailsBean updatePartially(DriverDetailsBean driverDetails, int id);
+	public DriverDetailsPojo updatePartially(DriverDetailsPojo driverDetails, int id);
 }

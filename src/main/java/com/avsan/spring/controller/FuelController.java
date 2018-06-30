@@ -27,19 +27,19 @@ public class FuelController {
 	@Autowired
 	FuelDetailsService FuelDetailsService;
 
-    @GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<FuelDetailsBean> getFuelDetailsBeanById(@PathVariable("id") int id) {
+   /* @GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<FuelDetailsPojo> getFuelDetailsBeanById(@PathVariable("id") int id) {
         System.out.println("Fetching FuelDetailsBean with id " + id);
-        FuelDetailsBean FuelDetailsBean = FuelDetailsService.findById(id);
+        FuelDetailsPojo FuelDetailsBean = FuelDetailsService.findById(id);
         if (FuelDetailsBean == null) {
-            return new ResponseEntity<FuelDetailsBean>(HttpStatus.NOT_FOUND);
+            return new ResponseEntity<FuelDetailsPojo>(HttpStatus.NOT_FOUND);
         }
-        return new ResponseEntity<FuelDetailsBean>(FuelDetailsBean, HttpStatus.OK);
+        return new ResponseEntity<FuelDetailsPojo>(FuelDetailsBean, HttpStatus.OK);
     }
     
 	 @PostMapping(value="/create",headers="Accept=application/json")
-	 public ResponseEntity<Void> createFuelDetailsBean(@RequestBody FuelDetailsBean FuelDetailsBean, UriComponentsBuilder ucBuilder){
-	     System.out.println("Creating FuelDetailsBean "+FuelDetailsBean.getBankDetails());
+	 public ResponseEntity<Void> createFuelDetailsBean(@RequestBody FuelDetailsPojo FuelDetailsBean, UriComponentsBuilder ucBuilder){
+	     //System.out.println("Creating FuelDetailsBean "+FuelDetailsBean.getBank);
 	     FuelDetailsService.createFuelDetails(FuelDetailsBean);
 	     HttpHeaders headers = new HttpHeaders();
 	     headers.setLocation(ucBuilder.path("/FuelDetailsBean/{id}").buildAndExpand(FuelDetailsBean.getSlno()).toUri());
@@ -47,17 +47,17 @@ public class FuelController {
 	 }
 
 	 @GetMapping(value="/get", headers="Accept=application/json")
-	 public List<FuelDetailsBean> getAllFuelDetailsBean() {	 
-	  List<FuelDetailsBean> tasks=FuelDetailsService.getFuelDetails();
+	 public List<FuelDetailsPojo> getAllFuelDetailsBean() {	 
+	  List<FuelDetailsPojo> tasks=FuelDetailsService.getFuelDetails();
 	  return tasks;
 	
 	 }
 
 	@PutMapping(value="/update", headers="Accept=application/json")
-	public ResponseEntity<String> updateFuelDetailsBean(@RequestBody FuelDetailsBean currentFuelDetailsBean)
+	public ResponseEntity<String> updateFuelDetailsBean(@RequestBody FuelDetailsPojo currentFuelDetailsBean)
 	{
 		System.out.println("sd");
-	FuelDetailsBean FuelDetailsBean = FuelDetailsService.findById(currentFuelDetailsBean.getSlno());
+	FuelDetailsPojo FuelDetailsBean = FuelDetailsService.findById(currentFuelDetailsBean.getSlno());
 	if (FuelDetailsBean==null) {
 		return new ResponseEntity<String>(HttpStatus.NOT_FOUND);
 	}
@@ -66,22 +66,22 @@ public class FuelController {
 	}
 	
 	@DeleteMapping(value="/{id}", headers ="Accept=application/json")
-	public ResponseEntity<FuelDetailsBean> deleteFuelDetailsBean(@PathVariable("id") int id){
-		FuelDetailsBean FuelDetailsBean = FuelDetailsService.findById(id);
+	public ResponseEntity<FuelDetailsPojo> deleteFuelDetailsBean(@PathVariable("id") int id){
+		FuelDetailsPojo FuelDetailsBean = FuelDetailsService.findById(id);
 		if (FuelDetailsBean == null) {
-			return new ResponseEntity<FuelDetailsBean>(HttpStatus.NOT_FOUND);
+			return new ResponseEntity<FuelDetailsPojo>(HttpStatus.NOT_FOUND);
 		}
 		FuelDetailsService.deleteFuelDetailsById(id);
-		return new ResponseEntity<FuelDetailsBean>(HttpStatus.NO_CONTENT);
+		return new ResponseEntity<FuelDetailsPojo>(HttpStatus.NO_CONTENT);
 	}
 	
 	@PatchMapping(value="/{id}", headers="Accept=application/json")
-	public ResponseEntity<FuelDetailsBean> updateFuelDetailsBeanPartially(@PathVariable("id") int id, @RequestBody FuelDetailsBean currentFuelDetailsBean){
-		FuelDetailsBean FuelDetailsBean = FuelDetailsService.findById(id);
+	public ResponseEntity<FuelDetailsPojo> updateFuelDetailsBeanPartially(@PathVariable("id") int id, @RequestBody FuelDetailsPojo currentFuelDetailsBean){
+		FuelDetailsPojo FuelDetailsBean = FuelDetailsService.findById(id);
 		if(FuelDetailsBean ==null){
-			return new ResponseEntity<FuelDetailsBean>(HttpStatus.NOT_FOUND);
+			return new ResponseEntity<FuelDetailsPojo>(HttpStatus.NOT_FOUND);
 		}
-		FuelDetailsBean usr =	FuelDetailsService.updatePartially(currentFuelDetailsBean, id);
-		return new ResponseEntity<FuelDetailsBean>(usr, HttpStatus.OK);
-	}
+		FuelDetailsPojo usr =	FuelDetailsService.updatePartially(currentFuelDetailsBean, id);
+		return new ResponseEntity<FuelDetailsPojo>(usr, HttpStatus.OK);
+	}*/
 }

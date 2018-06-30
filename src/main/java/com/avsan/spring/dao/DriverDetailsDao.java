@@ -2,15 +2,15 @@ package com.avsan.spring.dao;
 
 import java.util.List;
 
-import com.avsan.spring.bean.DriverDetailsBean;
+import com.avsan.spring.pojo.DriverDetailsPojo;
 
 public interface DriverDetailsDao {
 	
-	public void addDriverDetails(DriverDetailsBean driverDetails);
-	public List<DriverDetailsBean> getDriverDetails();
-	public DriverDetailsBean findById(int id);
-	public DriverDetailsBean update(DriverDetailsBean driverDetails, int id);
-	public DriverDetailsBean updateCountry(DriverDetailsBean driverDetails, int id);
+	public void addDriverDetails(DriverDetailsPojo driverDetails);
+	public List<DriverDetailsPojo> getDriverDetails();
+	public DriverDetailsPojo findById(int id);
+	public DriverDetailsPojo update(DriverDetailsPojo driverDetails, int id);
+	public DriverDetailsPojo updateCountry(DriverDetailsPojo driverDetails, int id);
 	public void delete(int id);
 	
 }

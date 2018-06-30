@@ -1,31 +1,47 @@
 package com.avsan.spring.bean;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-
-import lombok.Data;
-
-
-@Entity
-@Table(name="UserInfo")
-@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
-@Data
-public class User {
-
-	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
-	private int id;
-
-	@Column(name="country")
-	private String country;
-	
-	@Column(name="name")
-	private String name;
-	
-}
+public class User { 
+   @NotNull
+   @Size(min=3, max=10)	
+   private String userId;
+   @NotNull
+   @Size(min=5, max=20)	   
+   private String userName;
+   @NotNull   
+   private String gender;
+   private Boolean married;
+   private String profile;
+   public String getUserId() {
+		return userId;
+   }
+   public void setUserId(String userId) {
+		this.userId = userId;
+   }
+   public String getUserName() {
+		return userName;
+   }
+   public void setUserName(String userName) {
+		this.userName = userName;
+   }
+   public String getGender() {
+		return gender;
+   }
+   public void setGender(String gender) {
+		this.gender = gender;
+   }
+   public Boolean getMarried() {
+		return married;
+   }
+   public void setMarried(Boolean married) {
+		this.married = married;
+   }
+   public String getProfile() {
+		return profile;
+   }
+   public void setProfile(String profile) {
+		this.profile = profile;
+   }  
+} 

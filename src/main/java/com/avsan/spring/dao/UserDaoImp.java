@@ -38,8 +38,8 @@ public class UserDaoImp implements UserDao{
 		// TODO Auto-generated method stub
 		Session session = sessionFactory.getCurrentSession();
 		User user =(User)session.get(User.class, id);
-		user.setCountry(val.getCountry());
-		user.setName(val.getName());
+		//user.setCountry(val.getCountry());
+		//user.setName(val.getName());
 		session.update(user);
 		return user;
 	}
@@ -54,7 +54,7 @@ public class UserDaoImp implements UserDao{
 	public User updateCountry(User val, int id){
 		Session session = sessionFactory.getCurrentSession();
 		User user = (User)session.load(User.class, id);
-		user.setCountry(val.getCountry());
+	//	user.setCountry(val.getCountry());
 		return user;
 	}
 

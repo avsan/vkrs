@@ -9,7 +9,7 @@ import org.springframework.stereotype.Repository;
 
 import com.avsan.spring.bean.DailyTripDetailsBean;
 @Repository
-public class DailyTripDetailsDaoImp implements DailyTripDetailsDao{
+public class DailyTripDetailsDaoImp {/*implements DailyTripDetailsDao{
 	@Autowired
 	private SessionFactory sessionFactory;
 
@@ -49,7 +49,7 @@ public class DailyTripDetailsDaoImp implements DailyTripDetailsDao{
 		
 	}
 	  
-/*	public void addDailyTripDetails(DailyTripDetailsBean dailyTripDetails) {
+	public void addDailyTripDetails(DailyTripDetailsBean dailyTripDetails) {
 		// TODO Auto-generated method stub
 		 Session session = sessionFactory.getCurrentSession();
 		  session.save(dailyTripDetails); 

@@ -8,6 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.avsan.spring.bean.DriverDetailsBean;
 import com.avsan.spring.dao.DriverDetailsDao;
+import com.avsan.spring.pojo.DriverDetailsPojo;
 
 @Service
 @Transactional
@@ -16,34 +17,30 @@ public class DriverDetailsServiceImp implements DriverDetailsService {
 	DriverDetailsDao driverDetailsDao;
 
 
-	public List<DriverDetailsBean> getDriverDetails() {
-		// TODO Auto-generated method stub
+
+	public List<DriverDetailsPojo> getDriverDetails() {
 		return driverDetailsDao.getDriverDetails();
 	}
 
-	public DriverDetailsBean findById(int id) {
-		// TODO Auto-generated method stub
+	public DriverDetailsPojo findById(int id) {
 		return driverDetailsDao.findById(id);
 	}
 
-	public void createDriverDetails(DriverDetailsBean driverDetails) {
-		// TODO Auto-generated method stub
+	public void createDriverDetails(DriverDetailsPojo driverDetails) {
 		driverDetailsDao.addDriverDetails(driverDetails);
 	}
 
 	public void deleteDriverDetailsById(int id) {
-		// TODO Auto-generated method stub
 		driverDetailsDao.delete(id);
 	}
 	@Override
-	public DriverDetailsBean updatePartially(DriverDetailsBean driverDetails, int id) {
+	public DriverDetailsPojo updatePartially(DriverDetailsPojo driverDetails, int id) {
 		driverDetailsDao.updateCountry(driverDetails,id);
 		return driverDetailsDao.findById(id);
 	}
 
 	@Override
-	public DriverDetailsBean update(DriverDetailsBean driverDetails,int id) {
-		// TODO Auto-generated method stub
+	public DriverDetailsPojo update(DriverDetailsPojo driverDetails,int id) {
 		return driverDetailsDao.update(driverDetails, id);
 	}
 

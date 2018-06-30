@@ -11,9 +11,6 @@ import javax.persistence.Table;
 
 import lombok.Data;
 
-@Entity
-@Table(name = "PRODUCT")
-@Data
 public class Product {
     private long productId;
     private String name;
@@ -21,21 +18,4 @@ public class Product {
     private float price;
     private ProductDetail productDetail;
  
-    public Product() {
-    }
- 
-    @Id
-    @GeneratedValue
-    @Column(name = "PRODUCT_ID")
-    public long getProductId() {
-        return productId;
-    }
- 
-    @OneToOne(cascade = CascadeType.ALL)
-    @PrimaryKeyJoinColumn
-    public ProductDetail getProductDetail() {
-        return productDetail;
-    }
- 
-    // other getters and setters
 }

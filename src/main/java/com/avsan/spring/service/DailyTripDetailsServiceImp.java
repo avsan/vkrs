@@ -11,7 +11,7 @@ import com.avsan.spring.dao.DailyTripDetailsDao;
 
 @Service
 @Transactional
-public class DailyTripDetailsServiceImp implements DailyTripDetailsService {
+public class DailyTripDetailsServiceImp {/*implements DailyTripDetailsService {
 	@Autowired
 	DailyTripDetailsDao dailyTripDetailsDao;
 
@@ -45,7 +45,7 @@ public class DailyTripDetailsServiceImp implements DailyTripDetailsService {
 		// TODO Auto-generated method stub
 		return dailyTripDetailsDao.update(dailyTripDetails, id);
 	}
-
+*/
 
 	
 }

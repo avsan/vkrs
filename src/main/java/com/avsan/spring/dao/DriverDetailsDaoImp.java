@@ -7,37 +7,37 @@ import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import com.avsan.spring.bean.DriverDetailsBean;
+import com.avsan.spring.pojo.DriverDetailsPojo;
 @Repository
 public class DriverDetailsDaoImp implements DriverDetailsDao{
 	@Autowired
 	private SessionFactory sessionFactory;
 	  
-	public void addDriverDetails(DriverDetailsBean driverDetails) {
+	public void addDriverDetails(DriverDetailsPojo driverDetails) {
 		// TODO Auto-generated method stub
 		 Session session = sessionFactory.getCurrentSession();
 		  session.save(driverDetails); 
 	}
 
-	public List<DriverDetailsBean> getDriverDetails() {
+	public List<DriverDetailsPojo> getDriverDetails() {
 		// TODO Auto-generated method stub
 		 Session session = sessionFactory.getCurrentSession();
 		@SuppressWarnings("unchecked")
-		List<DriverDetailsBean> list= session.createCriteria(DriverDetailsBean.class).list();
+		List<DriverDetailsPojo> list= session.createCriteria(DriverDetailsPojo.class).list();
 		return list;
 	}
 
-	public DriverDetailsBean findById(int id) {
+	public DriverDetailsPojo findById(int id) {
 		// TODO Auto-generated method stub
 		 Session session = sessionFactory.getCurrentSession();
-		DriverDetailsBean DriverDetailsBean=(DriverDetailsBean) session.get(DriverDetailsBean.class,id);
+		DriverDetailsPojo DriverDetailsBean=(DriverDetailsPojo) session.get(DriverDetailsPojo.class,id);
 		return DriverDetailsBean;
 	}
 
-	public DriverDetailsBean update(DriverDetailsBean val, int id) {
+	public DriverDetailsPojo update(DriverDetailsPojo val, int id) {
 		// TODO Auto-generated method stub
 		Session session = sessionFactory.getCurrentSession();
-		DriverDetailsBean driverDetails =(DriverDetailsBean)session.get(DriverDetailsBean.class, id);
+		DriverDetailsPojo driverDetails =(DriverDetailsPojo)session.get(DriverDetailsPojo.class, id);
 		
 		session.update(driverDetails);
 		return driverDetails;
@@ -46,13 +46,13 @@ public class DriverDetailsDaoImp implements DriverDetailsDao{
 	public void delete(int id) {
 		// TODO Auto-generated method stub
 		Session session = sessionFactory.getCurrentSession();
-		DriverDetailsBean DriverDetailsBean = findById(id);
+		DriverDetailsPojo DriverDetailsBean = findById(id);
 		session.delete(DriverDetailsBean);
 	}
 	@Override
-	public DriverDetailsBean updateCountry(DriverDetailsBean val, int id){
+	public DriverDetailsPojo updateCountry(DriverDetailsPojo val, int id){
 		Session session = sessionFactory.getCurrentSession();
-		DriverDetailsBean driverDetails = (DriverDetailsBean)session.load(DriverDetailsBean.class, id);
+		DriverDetailsPojo driverDetails = (DriverDetailsPojo)session.load(DriverDetailsPojo.class, id);
 		//DriverDetailsBean.setCountry(val.getCountry());
 		return driverDetails;
 	}

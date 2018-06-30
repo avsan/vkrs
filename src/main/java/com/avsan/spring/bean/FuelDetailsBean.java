@@ -5,19 +5,19 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import lombok.Data;
 
-@Entity
-@Table(name="fuel_details")
-@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})	
-@Data
+
+
 public class FuelDetailsBean {
 
-	@Id
+	/*@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	@Column(name = "slno")
 	private int slno;
@@ -25,30 +25,40 @@ public class FuelDetailsBean {
 	@Column(name = "card_number")
 	private String cardNumber;
 	
-	@Column(name = "vechile_number")
-	private String vechileNumber;
-	
-	@Column(name = "driver_name")
-	private String driverName;
+	@ManyToOne
+	@JoinColumn(name = "vehicle_id", nullable = false)
+	private  VehicleDetailsBean vehicle_id;
+
+	@ManyToOne
+	@JoinColumn(name = "driver_id", nullable = false)
+	private DriverDetailsBean driver_id;
 	
 	@Column(name = "incharge")
 	private String incharge;
-
+	
+	@Column(name = "oil_filling_date_and_time")
+	private String oilFillingDateAndTime;
+	
+	@Column(name = "metre_reading")
+	private String metreReading;
+	
 	@Column(name = "ltr")
 	private String ltr;
 	
 	@Column(name = "rate")
 	private String rate;
 	
-	@Column(name = "fuel_type")
-	private String fuelType;
+	@ManyToOne
+	@JoinColumn(name = "ssno", nullable = false)
+	private CategoriesTypeBean fuelType;
 	
-	@Column(name = "bank_details")
-	private String bankDetails;
+	@ManyToOne
+	@JoinColumn(name = "bunk_id", nullable = false)
+	private BunkDetailsBean bunkId;
 	
 	@Column(name = "bill_number")
 	private String billNumber;
 	
 	@Column(name = "verified_by")
-	private String verifiedBy;
+	private String verifiedBy;*/
 }

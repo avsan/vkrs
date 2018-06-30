@@ -11,8 +11,8 @@ import com.avsan.spring.dao.UserDao;
 
 @Service
 @Transactional
-public class UserServiceImp implements UserService {
-	@Autowired
+public class UserServiceImp {//implements UserService {
+/*	@Autowired
 	UserDao userDao;
 
 
@@ -46,5 +46,5 @@ public class UserServiceImp implements UserService {
 		// TODO Auto-generated method stub
 		return userDao.update(user, id);
 	}
-
+*/
 }

@@ -2,15 +2,16 @@ package com.avsan.spring.dao;
 
 import java.util.List;
 
-import com.avsan.spring.bean.FuelDetailsBean;
+import com.avsan.spring.pojo.FuelDetailsPojo;
 
 public interface FuelDetailsDao {
 	
-	public void addFuelDetails(FuelDetailsBean fuelDetails);
-	public List<FuelDetailsBean> getFuelDetails();
-	public FuelDetailsBean findById(int id);
-	public FuelDetailsBean update(FuelDetailsBean fuelDetails, int id);
-	public FuelDetailsBean updateCountry(FuelDetailsBean fuelDetails, int id);
+	public void addFuelDetails(FuelDetailsPojo fuelDetails);
+	public List<FuelDetailsPojo> getFuelDetails();
+	public FuelDetailsPojo findById(int id);
+	public FuelDetailsPojo update(FuelDetailsPojo fuelDetails, int id);
+	public FuelDetailsPojo updateCountry(FuelDetailsPojo fuelDetails, int id);
 	public void delete(int id);
 	
 }
+	

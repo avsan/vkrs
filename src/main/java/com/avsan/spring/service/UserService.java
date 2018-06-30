@@ -1,14 +1,18 @@
 package com.avsan.spring.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
-import com.avsan.spring.bean.User;
+import org.springframework.stereotype.Service;
 
-public interface UserService {
-	public void createUser(User user);
-	public List<User> getUser();
-	public User findById(int id);
-	public User update(User user, int id);
-	public void deleteUserById(int id);
-	public User updatePartially(User user, int id);
+import com.avsan.spring.bean.User;
+@Service
+public class UserService {
+	private List<User> allUsers = new ArrayList<>();
+	public List<User> getAllUserArticles(){
+		return allUsers;
+	}
+	public void addUser(User user) {
+		allUsers.add(user);
+	}
 }

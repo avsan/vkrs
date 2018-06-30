@@ -24,13 +24,13 @@ import com.avsan.spring.service.UserService;
 @RestController
 @RequestMapping(value={"/user"})
 public class UserController {
-	@Autowired
+	/*@Autowired
 	UserService userService;
 
     @GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<User> getUserById(@PathVariable("id") int id) {
         System.out.println("Fetching User with id " + id);
-        User user = userService.findById(id);
+        //User user = userService.findById(id);
         if (user == null) {
             return new ResponseEntity<User>(HttpStatus.NOT_FOUND);
         }
@@ -39,10 +39,10 @@ public class UserController {
     
 	 @PostMapping(value="/create",headers="Accept=application/json")
 	 public ResponseEntity<Void> createUser(@RequestBody User user, UriComponentsBuilder ucBuilder){
-	     System.out.println("Creating User "+user.getName());
-	     userService.createUser(user);
+	     //System.out.println("Creating User "+user.getName());
+	     //userService.createUser(user);
 	     HttpHeaders headers = new HttpHeaders();
-	     headers.setLocation(ucBuilder.path("/user/{id}").buildAndExpand(user.getId()).toUri());
+	     //headers.setLocation(ucBuilder.path("/user/{id}").buildAndExpand(user.getId()).toUri());
 	     return new ResponseEntity<Void>(headers, HttpStatus.CREATED);
 	 }
 
@@ -83,5 +83,5 @@ public class UserController {
 		}
 		User usr =	userService.updatePartially(currentUser, id);
 		return new ResponseEntity<User>(usr, HttpStatus.OK);
-	}
+	}*/
 }

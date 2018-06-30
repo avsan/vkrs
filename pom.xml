@@ -2,10 +2,11 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
-	<groupId>com.candidjava.spring.boot</groupId>
-	<artifactId>helloworld</artifactId>
+	<groupId>com.avsan.spring.boot</groupId>
+	<packaging>war</packaging>
+	<artifactId>vkrs</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>helloworld-rest-hib-curd</name>
+	<name>vkrs</name>
 	<url>http://maven.apache.org</url>
 
 	<parent>
@@ -43,13 +44,30 @@
 			<artifactId>spring-boot-devtools</artifactId>
 			<optional>true</optional>
 		</dependency>
-		<!-- https://mvnrepository.com/artifact/org.projectlombok/lombok-maven -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-thymeleaf</artifactId>
+		</dependency>
+		<!-- Optional, for bootstrap -->
+		<dependency>
+			<groupId>org.webjars</groupId>
+			<artifactId>bootstrap</artifactId>
+			<version>3.3.7</version>
+		</dependency>
+		
 		 <dependency>
         <groupId>org.projectlombok</groupId>
         <artifactId>lombok</artifactId>
         <version>1.16.20</version>
         <scope>provided</scope>
     </dependency>
+    <!-- https://mvnrepository.com/artifact/org.webjars/bootstrap-datepicker -->
+<dependency>
+    <groupId>org.webjars</groupId>
+    <artifactId>bootstrap-datepicker</artifactId>
+    <version>1.0.1</version>
+</dependency>
+    
 	</dependencies>
 
 	<build>

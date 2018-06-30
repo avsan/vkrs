@@ -8,6 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.avsan.spring.bean.FuelDetailsBean;
 import com.avsan.spring.dao.FuelDetailsDao;
+import com.avsan.spring.pojo.FuelDetailsPojo;
 
 @Service
 @Transactional
@@ -16,17 +17,17 @@ public class FuelDetailsServiceImp implements FuelDetailsService {
 	FuelDetailsDao fuelDetailsDao;
 
 
-	public List<FuelDetailsBean> getFuelDetails() {
+	public List<FuelDetailsPojo> getFuelDetails() {
 		// TODO Auto-generated method stub
 		return fuelDetailsDao.getFuelDetails();
 	}
 
-	public FuelDetailsBean findById(int id) {
+	public FuelDetailsPojo findById(int id) {
 		// TODO Auto-generated method stub
 		return fuelDetailsDao.findById(id);
 	}
 
-	public void createFuelDetails(FuelDetailsBean fuelDetails) {
+	public void createFuelDetails(FuelDetailsPojo fuelDetails) {
 		// TODO Auto-generated method stub
 		fuelDetailsDao.addFuelDetails(fuelDetails);
 	}
@@ -36,13 +37,13 @@ public class FuelDetailsServiceImp implements FuelDetailsService {
 		fuelDetailsDao.delete(id);
 	}
 	@Override
-	public FuelDetailsBean updatePartially(FuelDetailsBean fuelDetails, int id) {
+	public FuelDetailsPojo updatePartially(FuelDetailsPojo fuelDetails, int id) {
 		fuelDetailsDao.updateCountry(fuelDetails,id);
 		return fuelDetailsDao.findById(id);
 	}
 
 	@Override
-	public FuelDetailsBean update(FuelDetailsBean fuelDetails,int id) {
+	public FuelDetailsPojo update(FuelDetailsPojo fuelDetails,int id) {
 		// TODO Auto-generated method stub
 		return fuelDetailsDao.update(fuelDetails, id);
 	}
