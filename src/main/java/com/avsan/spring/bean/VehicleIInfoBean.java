@@ -32,16 +32,12 @@ public class VehicleIInfoBean extends VehicleDetailsBean {
 	@Size(min=1)
 	private String dateOfPurchase;
 	@NotNull
-	@Size(min=1)
 	private int totalCostOfVehicle;
 	@NotNull
-	@Size(min=1)
 	private int downPayment;
 	@NotNull
-	@Size(min=1)
 	private int totalLoan;
 	@NotNull
-	@Size(min=1)
 	private int emiAmount;
 	@NotNull
 	@Size(min=1)
@@ -50,10 +46,8 @@ public class VehicleIInfoBean extends VehicleDetailsBean {
 	@Size(min=1)
 	private String contactPersonName;
 	@NotNull
-	@Size(min=1)
 	private String contactNo;
 	@NotNull
-	@Size(min=1)
 	private int noOfEmi;
 	@NotNull
 	@Size(min=1)

@@ -24,7 +24,7 @@ public class VehicleAuditBean {
 	@Size(min=1)
 	private String dateOfPurchase;
 	@NotNull
-	@Size(min=1)
+	//@Size()
 	private int totalCostOfVehicle;
 	@NotNull
 	@Size(min=1)
@@ -45,7 +45,7 @@ public class VehicleAuditBean {
 	@Size(min=1)
 	private String contactNo;
 	@NotNull
-	@Size(min=1)
+	//@Size(min=10)
 	private int noOfEmi;
 	@NotNull
 	@Size(min=1)

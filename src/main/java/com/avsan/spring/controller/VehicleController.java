@@ -18,8 +18,10 @@ import org.springframework.web.servlet.ModelAndView;
 import com.avsan.spring.bean.VehicleDetailsBean;
 import com.avsan.spring.bean.VehicleIInfoBean;
 import com.avsan.spring.pojo.InsurancePojo;
+import com.avsan.spring.pojo.VehicleAuditPojo;
 import com.avsan.spring.pojo.VehicleDetailsPojo;
 import com.avsan.spring.service.InsurenceService;
+import com.avsan.spring.service.VehicleAuditService;
 import com.avsan.spring.service.VehicleDetailsService;
 
 @RestController
@@ -30,6 +32,10 @@ public class VehicleController {
 	
 	@Autowired
 	private InsurenceService insurenceService;
+	
+	@Autowired
+	private  VehicleAuditService vehicleAuditService;
+	
 	@GetMapping("addVehicle")
 	public ModelAndView createUserView() {
 	    ModelAndView mav = new ModelAndView();
@@ -78,6 +84,25 @@ public class VehicleController {
 		insurencePojo.setValidFrom(vehicleIInfoBean.getValidFrom());
 		insurencePojo.setValidTo(vehicleIInfoBean.getValidTo());
 		insurenceService.createInsurence(insurencePojo);
+		
+		VehicleAuditPojo vehicleAuditPojo=new VehicleAuditPojo();
+		if(vehicleIInfoBean!=null) {
+		vehicleAuditPojo.setContactNo(vehicleIInfoBean.getContactNo());
+		vehicleAuditPojo.setContactPersonName(vehicleIInfoBean.getContactPersonName());
+		vehicleAuditPojo.setDownPayment(vehicleIInfoBean.getDownPayment());
+		vehicleAuditPojo.setDateOfPurchase(vehicleIInfoBean.getDateOfPurchase());
+		vehicleAuditPojo.setEmiAmount(vehicleIInfoBean.getEmiAmount());
+		vehicleAuditPojo.setEmiDate(vehicleIInfoBean.getEmiDate());
+		vehicleAuditPojo.setLoanFinancedBy(vehicleIInfoBean.getLoanFinancedBy());
+		vehicleAuditPojo.setNameOfOwner(vehicleIInfoBean.getNameOfOwner());
+		vehicleAuditPojo.setNoOfEmi(vehicleIInfoBean.getNoOfEmi());
+		//vehicleAuditPojo.setRegistratioNo(vehicleIInfoBean.getR);
+		vehicleAuditPojo.setTotalCostOfVehicle(vehicleIInfoBean.getTotalCostOfVehicle());
+		vehicleAuditPojo.setTotalLoan(vehicleIInfoBean.getTotalLoan());
+		vehicleAuditPojo.setVehiclePrNumber(vehicleIInfoBean.getVehiclePrNumber());
+		vehicleAuditService.createVehicleAudit(vehicleAuditPojo);
+		}
+		
 	    // HttpHeaders headers = new HttpHeaders();
 	    // headers.setLocation(ucBuilder.path("/VehicleDetailsBean/{id}").buildAndExpand(VehicleDetailsBean.getVechilePrNumber()));
 
@@ -173,6 +198,7 @@ public class VehicleController {
 	    vehicleDetailsPojo.setVehicleColor(VehicleDetailsBean.getVehicleColor());
 	    vehicleDetailsPojo.setWarrantyValidUpTo(VehicleDetailsBean.getWarrantyValidUpTo());
 	    vehicleDetailsService.update(vehicleDetailsPojo, vechileId);
+	    
 	   // vehicleDetailsService.createVehicleDetails(vehicleDetailsPojo);
 	    // HttpHeaders headers = new HttpHeaders();
 	    // headers.setLocation(ucBuilder.path("/VehicleDetailsBean/{id}").buildAndExpand(VehicleDetailsBean.getVechilePrNumber()));
