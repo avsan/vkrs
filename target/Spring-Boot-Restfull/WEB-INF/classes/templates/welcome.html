@@ -1,0 +1,523 @@
+
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<div th:replace="fragments/header :: header-css" />
+
+</head>
+<body>
+	<div class="container">
+		<div th:replace="fragments/header :: header" />
+		<div class="starter-template">
+			<h1>Vehicle Information</h1>
+		</div>
+
+
+		<form action="#"
+			th:action="${vehicleDetailsBean.vehicleId==0} ? @{/vehicledetails/addVehicle} :  @{/vehicledetails/updateVehicle?vehicleId={vehicleId}(vehicleId=${vehicleDetailsBean.vehicleId})}"
+			th:object="${vehicleDetailsBean}" method="POST">
+			<!--<<form action="#" th:action="${true} ? '@{/vehicledetails/updateVehicle}' : '@{/vehicledetails/addVehicle}'}" th:object="${vehicleDetailsBean}" method="POST"> -->
+			<h1 th:text="#{app.create-user}"
+				th:unless="${vehicleDetailsBean!=null}">Create</h1>
+			<h1
+				th:text="${vehicleDetailsBean.vehicleId!=0}? #{user.form.add} : #{app.create-user}">Update</h1>
+
+
+			<table>
+				<tr>
+					<td th:text="#{vehicle.pr.number}"></td>
+					<td><input type="text" th:field="*{vehiclePrNumber}"
+						th:value="${vehicleDetailsBean.vehiclePrNumber}" /> <label
+						th:if="${#fields.hasErrors('vehiclePrNumber')}"
+						th:text="#{error.}" th:class="'error'">Id Error</label></td>
+				</tr>
+				<tr>
+					<td th:text="#{name.of.owner}"></td>
+					<td><input type="text" th:field="*{nameOfOwner}"
+						th:value="${vehicleDetailsBean.nameOfOwner}" /> <label
+						th:if="${#fields.hasErrors('nameOfOwner')}" th:text="#{error.}"
+						th:class="'error'">Name Error</label></td>
+				</tr>
+				<tr>
+					<td th:text="#{chesis.number}"></td>
+					<td><input type="text" th:field="*{chesisNumber}"
+						th:value="${vehicleDetailsBean.chesisNumber}" /> <label
+						th:if="${#fields.hasErrors('chesisNumber')}" th:text="#{error.}"
+						th:class="'error'">Id Error</label></td>
+				</tr>
+				<tr>
+					<td th:text="#{engine.number}"></td>
+					<td><input type="text" th:field="*{engineNumber}"
+						th:value="${vehicleDetailsBean.engineNumber}" /> <label
+						th:if="${#fields.hasErrors('engineNumber')}" th:text="#{error.}"
+						th:class="'error'">Name Error</label></td>
+				</tr>
+				<tr>
+					<td th:text="#{cubic.capacity}"></td>
+					<td><input type="text" th:field="*{cubicCapacity}"
+						th:value="${vehicleDetailsBean.cubicCapacity}" /> <label
+						th:if="${#fields.hasErrors('cubicCapacity')}" th:text="#{error.}"
+						th:class="'error'">Id Error</label></td>
+				</tr>
+				<tr>
+					<td th:text="#{full.weight.capacity}"></td>
+					<td><input type="text" th:field="*{fullWeightCapacity}"
+						th:value="${vehicleDetailsBean.fullWeightCapacity}" /> <label
+						th:if="${#fields.hasErrors('fullWeightCapacity')}"
+						th:text="#{error.}" th:class="'error'">Name Error</label></td>
+				</tr>
+				<tr>
+					<td th:text="#{unloaded.weight}"></td>
+					<td><input type="text" th:field="*{unloadedWeight}"
+						th:value="${vehicleDetailsBean.unloadedWeight}" /> <label
+						th:if="${#fields.hasErrors('unloadedWeight')}" th:text="#{error.}"
+						th:class="'error'">Id Error</label></td>
+				</tr>
+				<tr>
+					<td th:text="#{oil.tank.capacity}"></td>
+					<td><input type="text" th:field="*{oilTankCapacity}"
+						th:value="${vehicleDetailsBean.oilTankCapacity}" /> <label
+						th:if="${#fields.hasErrors('oilTankCapacity')}"
+						th:text="#{error.}" th:class="'error'">Name Error</label></td>
+				</tr>
+				<tr>
+					<td th:text="#{vehicle.color}"></td>
+					<td><input type="text" th:field="*{vehicleColor}"
+						th:value="${vehicleDetailsBean.vehicleColor}" /> <label
+						th:if="${#fields.hasErrors('vehicleColor')}" th:text="#{error.}"
+						th:class="'error'">Id Error</label></td>
+				</tr>
+				<tr>
+					<td th:text="#{date.of.registration}"></td>
+					<td><input type="date" th:field="*{dateOfRegistration}"
+						th:value="${vehicleDetailsBean.dateOfRegistration}" /> <label
+						th:if="${#fields.hasErrors('dateOfRegistration')}"
+						th:text="#{error.}" th:class="'error'">Name Error</label></td>
+				</tr>
+				<tr>
+					<td th:text="#{registration.valid.upto}"></td>
+					<td><input type="date" th:field="*{registrationValidupto}"
+						th:value="${vehicleDetailsBean.registrationValidupto}" /> <label
+						th:if="${#fields.hasErrors('registrationValidupto')}"
+						th:text="#{error.}" th:class="'error'">Id Error</label></td>
+				</tr>
+				<tr>
+					<td th:text="#{payed.tax}"></td>
+					<td><input type="text" th:field="*{payedTax}"
+						th:value="${vehicleDetailsBean.payedTax}" /> <label
+						th:if="${#fields.hasErrors('payedTax')}" th:text="#{error.}"
+						th:class="'error'">Name Error</label></td>
+				</tr>
+				<tr>
+					<td th:text="#{company.warranty.details}"></td>
+					<td><input type="text" th:field="*{companyWarrantyDetails}"
+						th:value="${vehicleDetailsBean.companyWarrantyDetails}" /> <label
+						th:if="${#fields.hasErrors('companyWarrantyDetails')}"
+						th:text="#{error.}" th:class="'error'">Id Error</label></td>
+				</tr>
+				<tr>
+					<td th:text="#{warranty.valid.upto}"></td>
+					<td><input type="date" th:field="*{warrantyValidUpTo}"
+						th:value="${vehicleDetailsBean.warrantyValidUpTo}" /> <label
+						th:if="${#fields.hasErrors('warrantyValidUpTo')}"
+						th:text="#{error.}" th:class="'error'">Name Error</label></td>
+				</tr>
+				<tr>
+					<td th:text="#{description}"></td>
+					<td><input type="text" th:field="*{description}"
+						th:value="${vehicleDetailsBean.description}" /> <label
+						th:if="${#fields.hasErrors('description')}" th:text="#{error.}"
+						th:class="'error'">Id Error</label></td>
+				</tr>
+				<!-- <tr><td th:text="#{user.gender}"></td>
+	    	   <td>
+	    	       <input type="radio" th:field="*{gender}" value="Male"/><label th:text="#{user.gender.male}">M</label>
+	    	       <input type="radio" th:field="*{gender}" value="Female"/><label th:text="#{user.gender.female}">F</label>
+	    	       <label th:if="${#fields.hasErrors('gender')}" th:text="#{error.user.gender}" th:class="'error'">Gender Error</label>
+	    	   </td>
+	    	</tr>
+	    	<tr><td th:text="#{user.married}+ '?'"></td>
+	    	   <td>
+	    	       <input type="checkbox" th:field="*{married}" />
+	    	   </td>
+	    	</tr>	    	
+	    	<tr><td th:text="#{user.profile}"></td>
+	    	   <td>
+	    	       <select th:field="*{profile}">
+	    	          <option th:each="profile : ${allProfiles}" th:value="${profile}" th:text="${profile}">Profile</option>
+	    	       </select>
+	    	   </td>
+	    	</tr>	-->
+				<tr>
+					<td colspan="2">
+						<!-- th:action="${action} == 'Save' ? @{/manageCategory/addEditCategory/addCategory} : @{/manageCategory/addEditCategory/editCategory}" th:object="${addCategoryDTO}" method="POST"
+
+<button th:text="${action == 'Edit'} ? 'Edit' : 'Save'"  id="btnsubmit"  class="btn blue okMark" type="submit" ></button>
+	 --> <!--  <button th:text="${vehicleDetailsBean.vehicleId!=0}  ? #{user.form.update} : #{user.form.add}"  id="btnsubmit"  class="btn blue okMark" type="submit" ></button> -->
+						<input type="submit"
+						th:value="${vehicleDetailsBean.vehicleId!=0}  ? #{user.form.update} : #{user.form.add}" />
+						<input type="reset" th:value="#{user.form.reset}" />
+					</td>
+				</tr>
+			</table>
+		</form>
+	</div>
+	<script type="text/javascript"
+		src="../webjars/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+</body>
+</html>
+<!-- <!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>Spring Boot Thymeleaf + Spring Security</title>
+
+<div th:replace="fragments/header :: header-css" />
+
+</head>
+<body>
+	<div class="container-fluid">
+		<div class="row content">
+			<div class="col-sm-2 sidenav">
+				<div th:replace="fragments/header :: leftMenu" />
+			</div>
+
+			<div class="col-sm-10">
+				<div class="formcontener">
+					<h3 style="text-decoration: underline;">VEHICLE DETAILS</h3>
+
+					<form action="#"
+						th:action="${vehicleDetailsBean.vehicleId==0} ? @{/vehicledetails/addVehicle} :  @{/vehicledetails/updateVehicle?vehicleId={vehicleId}(vehicleId=${vehicleDetailsBean.vehicleId})}"
+						th:object="${vehicleDetailsBean}" method="POST">
+						<<form action="#" th:action="${true} ? '@{/vehicledetails/updateVehicle}' : '@{/vehicledetails/addVehicle}'}" th:object="${vehicleDetailsBean}" method="POST">
+						<h1 th:text="#{app.create-user}"
+							th:unless="${vehicleDetailsBean!=null}">Create</h1>
+						<h1
+							th:text="${vehicleDetailsBean.vehicleId!=0}? #{user.form.add} : #{app.create-user}">Update</h1>
+						<div class="row">
+
+							<div class="col-sm-6">
+
+								<div class="row left right top ">
+									<div class="col-sm-5  ">
+										<div class="content">
+											<label class="form-group" for="inputPassword"
+												th:text="#{vehicle.pr.number}"></label>
+										</div>
+									</div>
+									<div class="col-sm-7">
+										<div class="content">
+											<input class="form-control"
+												th:value="${vehicleDetailsBean.vehiclePrNumber}" type="text"
+												th:field="*{vehiclePrNumber}" /> <label
+												th:if="${#fields.hasErrors('vehiclePrNumber')}"
+												th:text="#{error.}" th:class="'error'">Id Error</label>
+												<input type="text" class="form-control" />
+										</div>
+									</div>
+								</div>
+
+								<div class="row left right">
+									<div class="col-sm-5  ">
+										<div class="content">
+											<label class="form-group" for="inputPassword"
+												th:text="#{name.of.owner}"></label>
+										</div>
+									</div>
+									<div class="col-sm-7">
+										<div class="content">
+											<input class="form-control"
+												th:value="${vehicleDetailsBean.nameOfOwner}" type="text"
+												th:field="*{nameOfOwner}" /> <label
+												th:if="${#fields.hasErrors('nameOfOwner')}"
+												th:text="#{error.}" th:class="'error'">Name Error</label>
+												<input type="text" class="form-control" />
+										</div>
+									</div>
+								</div>
+
+								<div class="row left right">
+									<div class="col-sm-5  ">
+										<div class="content">
+											<label class="form-group" for="inputPassword"
+												th:text="#{chesis.number}"></label>
+										</div>
+									</div>
+									<div class="col-sm-7">
+										<div class="content">
+											<input class="form-control"
+												th:value="${vehicleDetailsBean.chesisNumber}" type="text"
+												th:field="*{chesisNumber}" /> <label
+												th:if="${#fields.hasErrors('chesisNumber')}"
+												th:text="#{error.}" th:class="'error'">Id Error</label>
+												<input type="text" class="form-control" />
+										</div>
+									</div>
+								</div>
+
+
+								<div class="row left right">
+									<div class="col-sm-5  ">
+										<div class="content">
+											<label class="form-group" for="inputPassword"
+												th:text="#{engine.number}"></label>
+										</div>
+									</div>
+									<div class="col-sm-7">
+										<div class="content">
+											<input class="form-control"
+												th:value="${vehicleDetailsBean.engineNumber}" type="text"
+												th:field="*{engineNumber}" /> <label
+												th:if="${#fields.hasErrors('engineNumber')}"
+												th:text="#{error.}" th:class="'error'">Id Error</label>
+												<input type="text" class="form-control" />
+										</div>
+									</div>
+								</div>
+
+								<div class="row left right ">
+									<div class="col-sm-5  ">
+										<div class="content">
+											<label class="form-group" for="inputPassword"
+												th:text="#{cubic.capacity}"></label>
+										</div>
+									</div>
+									<div class="col-sm-7">
+										<div class="content">
+											<input class="form-control"
+												th:value="${vehicleDetailsBean.cubicCapacity}" type="text"
+												th:field="*{cubicCapacity}" /> <label
+												th:if="${#fields.hasErrors('cubicCapacity')}"
+												th:text="#{error.}" th:class="'error'">Id Error</label>
+												<input type="text" class="form-control" />
+										</div>
+									</div>
+								</div>
+
+								<div class="row left right">
+									<div class="col-sm-5  ">
+										<div class="content">
+											<label class="form-group" for="inputPassword"
+												th:text="#{full.weight.capacity}"></label>
+										</div>
+									</div>
+									<div class="col-sm-7">
+										<div class="content">
+											<input type="text" th:field="*{fullWeightCapacity}"
+						th:value="${vehicleDetailsBean.fullWeightCapacity}" /> <label
+						th:if="${#fields.hasErrors('fullWeightCapacity')}"
+						th:text="#{error.}" th:class="'error'">Name Error</label>
+												<input type="text" class="form-control" />
+										</div>
+									</div>
+								</div>
+
+
+								<div class="row left right">
+									<div class="col-sm-5  ">
+										<div class="content">
+											<label class="form-group" for="inputPassword"
+												th:text="#{unloaded.weight}"></label>
+										</div>
+									</div>
+									<div class="col-sm-7">
+										<div class="content">
+											<input type="text" th:field="*{unloadedWeight}"
+						th:value="${vehicleDetailsBean.unloadedWeight}" /> <label
+						th:if="${#fields.hasErrors('unloadedWeight')}" th:text="#{error.}"
+						th:class="'error'">Id Error</label>
+												<input type="text" class="form-control" />
+										</div>
+									</div>
+								</div>
+
+								<div class="row left right">
+									<div class="col-sm-5  ">
+										<div class="content">
+											<label class="form-group" for="inputPassword"
+												th:text="#{oil.tank.capacity}"></label>
+										</div>
+									</div>
+									<div class="col-sm-7">
+										<div class="content">
+											<input class="form-control"
+												th:value="${vehicleDetailsBean.oilTankCapacity}" type="text"
+												th:field="*{oilTankCapacity}" /> <label
+												th:if="${#fields.hasErrors('oilTankCapacity')}"
+												th:text="#{error.}" th:class="'error'">Id Error</label>
+												<input type="text" class="form-control" />
+										</div>
+									</div>
+								</div>
+
+								<div class="row left right ">
+									<div class="col-sm-5  ">
+										<div class="content">
+											<label class="form-group" for="inputPassword"
+												th:text="#{vehicle.color}"></label>
+										</div>
+									</div>
+									<div class="col-sm-7">
+										<div class="content">
+											<input class="form-control"
+												th:value="${vehicleDetailsBean.vehicleColor}" type="text"
+												th:field="*{vehicleColor}" /> <label
+												th:if="${#fields.hasErrors('vehicleColor')}"
+												th:text="#{error.}" th:class="'error'">Id Error</label>
+												<input type="text" class="form-control" />
+										</div>
+									</div>
+								</div>
+
+								<div class="row left right ">
+									<div class="col-sm-5  ">
+										<div class="content">
+											<label class="form-group" for="inputPassword"
+												th:text="#{date.of.registration}"></label>
+										</div>
+									</div>
+									<div class="col-sm-7">
+										<div class="content">
+											<input class="form-control"
+												th:value="${vehicleDetailsBean.dateOfRegistration}"
+												type="text" th:field="*{dateOfRegistration}" /> <label
+												th:if="${#fields.hasErrors('dateOfRegistration')}"
+												th:text="#{error.}" th:class="'error'">Id Error</label>
+												<input type="text" class="form-control" />
+										</div>
+									</div>
+								</div>
+
+								<div class="row left right ">
+									<div class="col-sm-5  ">
+										<div class="content">
+											<label class="form-group" for="inputPassword"
+												th:text="#{registration.valid.upto}"></label>
+										</div>
+									</div>
+									<div class="col-sm-7">
+										<div class="content">
+											<input class="form-control"
+												th:value="${vehicleDetailsBean.registrationValidupto}"
+												type="text" th:field="*{registrationValidupto}" /> <label
+												th:if="${#fields.hasErrors('registrationValidupto')}"
+												th:text="#{error.}" th:class="'error'">Id Error</label>
+												<input type="text" class="form-control" />
+										</div>
+									</div>
+								</div>
+
+								<div class="row left right">
+									<div class="col-sm-5 ">
+										<div class="content">
+											<label class="form-group" for="inputPassword"
+												th:text="#{payed.tax}"></label>
+										</div>
+									</div>
+									<div class="col-sm-7">
+										<div class="content">
+											<input class="form-control"
+												th:value="${vehicleDetailsBean.payedTax}" type="text"
+												th:field="*{payedTax}" /> <label
+												th:if="${#fields.hasErrors('payedTax')}" th:text="#{error.}"
+												th:class="'error'">Id Error</label>
+												<input type="text" class="form-control" />
+										</div>
+									</div>
+								</div>
+
+								<div class="row left right ">
+									<div class="col-sm-5 ">
+										<div class="content">
+											<label class="form-group" for="inputPassword"
+												th:text="#{company.warranty.details}"></label>
+										</div>
+									</div>
+									<div class="col-sm-7">
+										<div class="content">
+											<input class="form-control"
+												th:value="${vehicleDetailsBean.companyWarrantyDetails}"
+												type="text" th:field="*{companyWarrantyDetails}" /> <label
+												th:if="${#fields.hasErrors('companyWarrantyDetails')}"
+												th:text="#{error.}" th:class="'error'">Id Error</label>
+												<input type="text" class="form-control" />
+										</div>
+									</div>
+								</div>
+
+								<div class="row left right">
+									<div class="col-sm-5 ">
+										<div class="content">
+											<label class="form-group" for="inputPassword"
+												th:text="#{warranty.valid.upto}"></label>
+										</div>
+									</div>
+									<div class="col-sm-7">
+										<div class="content">
+											<input class="form-control"
+												th:value="${vehicleDetailsBean.warrantyValidUpTo}"
+												type="text" th:field="*{warrantyValidUpTo}" /> <label
+												th:if="${#fields.hasErrors('warrantyValidUpTo')}"
+												th:text="#{error.}" th:class="'error'">Id Error</label>
+												<input type="text" class="form-control" />
+										</div>
+									</div>
+								</div>
+
+								<div class="row left right bottom">
+									<div class="col-sm-5 ">
+										<div class="content">
+											<label class="form-group" for="inputPassword"
+												th:text="#{description}"></label>
+										</div>
+									</div>
+									
+
+									<div class="col-sm-7">
+										<div class="content">
+											<input type="text"  class="form-control"
+												th:value="${vehicleDetailsBean.description}"
+												th:field="*{description}" />
+											<label th:if="${#fields.hasErrors('description')}"
+												th:text="#{error.}" th:class="'error'">Id Error</label>
+												<input type="text" class="form-control" />
+										</div>
+									</div>
+								</div>
+
+
+								<input type="submit"
+									th:value="${vehicleDetailsBean.vehicleId!=0}  ? #{user.form.update} : #{user.form.add}" />
+								<input type="reset" th:value="#{user.form.reset}" />
+							</div>
+							<div class="col-sm-6">
+								<div class="row left right top bottom">
+									<div class="col-sm-6 ">
+										<div class="content">
+											<label class="form-group" for="inputPassword">Password</label>
+										</div>
+									</div>
+									<div class="col-sm-6">
+										<div class="content">
+											<input type="text" class="form-control" />
+										</div>
+									</div>
+								</div>
+							</div>
+							<button type="submit" class="btn btn-success">Submit</button>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+	<footer class="container-fluid">
+		<p>Footer Text</p>
+	</footer>
+	<script type="text/javascript"
+		src="webjars/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+</body>
+</html>
+
+ -->

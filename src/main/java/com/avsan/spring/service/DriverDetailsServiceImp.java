@@ -43,5 +43,10 @@ public class DriverDetailsServiceImp implements DriverDetailsService {
 	public DriverDetailsPojo update(DriverDetailsPojo driverDetails,int id) {
 		return driverDetailsDao.update(driverDetails, id);
 	}
+	@Override
+	public int findDriverIdByDriveryLicanceNumber(String driveryLicanceNumber) {
+		// TODO Auto-generated method stub
+		return driverDetailsDao.findDriverIdByDriveryLicanceNumber(driveryLicanceNumber);
+	}
 
 }

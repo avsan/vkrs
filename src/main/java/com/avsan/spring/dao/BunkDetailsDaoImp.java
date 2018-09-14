@@ -52,12 +52,12 @@ public class BunkDetailsDaoImp implements BunkDetailsDao{
 	}
 
 	@Override
-	public BunkDetailsPojo update(BunkDetailsPojo BunkDetails, int id) {
+	public BunkDetailsPojo update(BunkDetailsPojo bunkDetails, int bunkId) {
 		Session session = sessionFactory.getCurrentSession();
-		BunkDetailsPojo bunkDetailsPojo =(BunkDetailsPojo)session.get(BunkDetailsPojo.class, id);
-		
-		session.update(bunkDetailsPojo);
-		return bunkDetailsPojo;
+		//BunkDetailsPojo bunkDetailsPojo =(BunkDetailsPojo)session.get(BunkDetailsPojo.class, id);
+		bunkDetails.setBunkId(bunkId);
+		session.update(bunkDetails);
+		return bunkDetails;
 	}
 
 	

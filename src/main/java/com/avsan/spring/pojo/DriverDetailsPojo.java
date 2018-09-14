@@ -25,7 +25,7 @@ public class DriverDetailsPojo {
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE)//, generator = "driver_detailse_sequence")
 	@Column(name = "driver_id")
-	private int driver_id;
+	private int driverId;
 
 	@Column(name = "drivery_licance_number")// uk
 	@NotNull

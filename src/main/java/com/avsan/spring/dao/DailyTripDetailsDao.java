@@ -11,6 +11,7 @@ public interface DailyTripDetailsDao {
 	public DailyTripDetailsPojo findById(int id);
 	public DailyTripDetailsPojo update(DailyTripDetailsPojo dailyTripDetails, int id);
 	public DailyTripDetailsPojo updateCountry(DailyTripDetailsPojo dailyTripDetails, int id);
+	public List<DailyTripDetailsPojo> getDailyTripDetailsByDate(String fromDate,String toDate);
 	public void delete(int id);
 	
 }

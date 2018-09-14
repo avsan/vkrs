@@ -1,64 +1,54 @@
 package com.avsan.spring.bean;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.avsan.spring.pojo.BunkDetailsPojo;
+import com.avsan.spring.pojo.CategoriesTypePojo;
+import com.avsan.spring.pojo.DriverDetailsPojo;
+import com.avsan.spring.pojo.VehicleDetailsPojo;
 
 import lombok.Data;
 
 
-
+@Data
 public class FuelDetailsBean {
-
-	/*@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
-	@Column(name = "slno")
+	
 	private int slno;
-	
-	@Column(name = "card_number")
+	@NotNull
+	@Size(min=1)
 	private String cardNumber;
-	
-	@ManyToOne
-	@JoinColumn(name = "vehicle_id", nullable = false)
-	private  VehicleDetailsBean vehicle_id;
-
-	@ManyToOne
-	@JoinColumn(name = "driver_id", nullable = false)
-	private DriverDetailsBean driver_id;
-	
-	@Column(name = "incharge")
+	@NotNull
+	@Size(min=1)
+	private  String vehicleId;
+	@NotNull
+	@Size(min=1)
+	private String driverId;
+	@NotNull
+	@Size(min=1)
 	private String incharge;
-	
-	@Column(name = "oil_filling_date_and_time")
+	@NotNull
+	@Size(min=1)
 	private String oilFillingDateAndTime;
-	
-	@Column(name = "metre_reading")
+	@NotNull
+	@Size(min=1)
 	private String metreReading;
-	
-	@Column(name = "ltr")
+	@NotNull
+	@Size(min=1)
 	private String ltr;
-	
-	@Column(name = "rate")
+	@NotNull
+	@Size(min=1)
 	private String rate;
-	
-	@ManyToOne
-	@JoinColumn(name = "ssno", nullable = false)
-	private CategoriesTypeBean fuelType;
-	
-	@ManyToOne
-	@JoinColumn(name = "bunk_id", nullable = false)
-	private BunkDetailsBean bunkId;
-	
-	@Column(name = "bill_number")
+	@NotNull
+	//@Size(min=1)
+	private int fuelType;
+	@NotNull
+	//@Size(min=1)
+	private int bunkId;
+	@NotNull
+	@Size(min=1)
 	private String billNumber;
-	
-	@Column(name = "verified_by")
-	private String verifiedBy;*/
+	@NotNull
+	@Size(min=1)
+	private String verifiedBy;
 }

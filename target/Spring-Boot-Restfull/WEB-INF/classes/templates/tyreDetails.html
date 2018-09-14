@@ -1,0 +1,115 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>Spring Boot Thymeleaf + Spring Security</title>
+
+<div th:replace="fragments/header :: header-css" />
+
+</head>
+<body>
+	<div class="container">
+		<div th:replace="fragments/header :: header" />
+		<div class="starter-template">
+			<h1>Driver Information</h1>
+		</div>
+		<!-- /.container -->
+		<form action="#"
+			th:action="${tyresDetailsBean.tyreId==0} ? @{/tyredetails/tyreEntry} :  @{/tyredetails/tyreEntry?tyreId={tyreId}(tyreId=${tyresDetailsBean.tyreId})}"
+			th:object="${tyresDetailsBean}" method="POST">
+			<h1 th:text="#{app.create-user}" th:unless="${tyresDetailsBean!=null}">Create</h1>
+			<h1
+				th:text="${tyresDetailsBean.tyreId!=0}? #{user.form.add} : #{app.create-user}">Update</h1>
+			<table>
+				<!-- <tr>
+					<td th:text="#{tyre.tyreId}"></td>
+					<td><input th:value="${tyresDetailsBean.tyreId}" type="text"
+						th:field="*{tyreId}" /> <label
+						th:if="${#fields.hasErrors('tyreId')}" th:text="#{error.}"
+						th:class="'error'">Id Error</label></td>
+				</tr> -->
+				<tr>
+					<td th:text="#{tyre.tyreModel}"></td>
+					<td><input th:value="${tyresDetailsBean.tyreModel}"
+						type="text" th:field="*{tyreModel}" /> <label
+						th:if="${#fields.hasErrors('tyreModel')}" th:text="#{error.}"
+						th:class="'error'">Name Error</label></td>
+				</tr>
+				<tr>
+					<td th:text="#{tyre.tyreCompany}"></td>
+					<td><input th:value="${tyresDetailsBean.tyreCompany}"
+						type="text" th:field="*{tyreCompany}" /> <label
+						th:if="${#fields.hasErrors('tyreCompany')}" th:text="#{error.}"
+						th:class="'error'">Name Error</label></td>
+				</tr>
+				<tr>
+					<td th:text="#{tyre.tyresPurchasedFrom}"></td>
+					<td><input
+						th:value="${tyresDetailsBean.tyresPurchasedFrom}" type="text"
+						th:field="*{tyresPurchasedFrom}" /> <label
+						th:if="${#fields.hasErrors('tyresPurchasedFrom')}"
+						th:text="#{error.}" th:class="'error'">Id Error</label></td>
+				</tr>
+				<tr>
+					<td th:text="#{tyre.purchaseDate}"></td>
+					<td><input
+						th:value="${tyresDetailsBean.purchaseDate}" type="date"
+						th:field="*{purchaseDate}" /> <label
+						th:if="${#fields.hasErrors('purchaseDate')}"
+						th:text="#{error.}" th:class="'error'">Id Error</label></td>
+				</tr>
+				<tr>
+					<td th:text="#{tyre.odometerReadingAtTyreChange}"></td>
+					<td><input th:value="${tyresDetailsBean.odometerReadingAtTyreChange}" type="text"
+						th:field="*{odometerReadingAtTyreChange}" /> <label
+						th:if="${#fields.hasErrors('odometerReadingAtTyreChange')}" th:text="#{error.}"
+						th:class="'error'">Name Error</label></td>
+				</tr>
+				<tr>
+					<td th:text="#{tyre.costPerTyre}"></td>
+					<td><input th:value="${tyresDetailsBean.costPerTyre}" type="text"
+						th:field="*{costPerTyre}" /> <label
+						th:if="${#fields.hasErrors('costPerTyre')}" th:text="#{error.}"
+						th:class="'error'">Name Error</label></td>
+				</tr>
+				<tr>
+					<td th:text="#{tyre.noOfTyresChanged}"></td>
+					<td><input th:value="${tyresDetailsBean.noOfTyresChanged}" type="text"
+						th:field="*{noOfTyresChanged}" /> <label
+						th:if="${#fields.hasErrors('noOfTyresChanged')}" th:text="#{error.}"
+						th:class="'error'">Name Error</label></td>
+				</tr>
+				<tr>
+					<td th:text="#{tyre.purchaseBillNo}"></td>
+					<td><input th:value="${tyresDetailsBean.purchaseBillNo}" type="text"
+						th:field="*{purchaseBillNo}" /> <label
+						th:if="${#fields.hasErrors('purchaseBillNo')}" th:text="#{error.}"
+						th:class="'error'">Name Error</label></td>
+				</tr>
+				<tr>
+				<td th:text="#{tyre.housingType}"></td>
+					<td><input th:value="${tyresDetailsBean.housingType}" type="text"
+						th:field="*{housingType}" /> <label
+						th:if="${#fields.hasErrors('housingType')}" th:text="#{error.}"
+						th:class="'error'">Name Error</label></td>
+				</tr>
+				<tr>
+					<td th:text="#{description}"></td>
+					<td><input th:value="${tyresDetailsBean.description}"
+						type="text" th:field="*{description}" /> <label
+						th:if="${#fields.hasErrors('description')}" th:text="#{error.}"
+						th:class="'error'">Id Error</label></td>
+				</tr>
+				<tr>
+					<td colspan="2"><input type="submit"
+						th:value="${tyresDetailsBean.tyreId!=0}  ? #{user.form.update} : #{user.form.add}" />
+						<!--   <input type="submit" th:value="#{user.form.submit}"/>  -->
+						<input type="reset" th:value="#{user.form.reset}" /></td>
+				</tr>
+			</table>
+		</form>
+	</div>
+	<script type="text/javascript"
+		src="../webjars/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+</body>
+</html>

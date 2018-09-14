@@ -12,4 +12,5 @@ public interface DriverDetailsService {
 	public DriverDetailsPojo update(DriverDetailsPojo driverDetails, int id);
 	public void deleteDriverDetailsById(int id);
 	public DriverDetailsPojo updatePartially(DriverDetailsPojo driverDetails, int id);
+	public int findDriverIdByDriveryLicanceNumber(String driveryLicanceNumber);
 }

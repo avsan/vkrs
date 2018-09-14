@@ -1,0 +1,257 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>Spring Boot Thymeleaf + Spring Security</title>
+<div th:replace="fragments/header :: header-css" />
+</head>
+<body>
+	<div class="container-fluid">
+		<div class="row content">
+			<div class="col-sm-2 sidenav">
+				<div th:replace="fragments/header :: leftMenu" />
+			</div>
+
+			<div class="col-sm-10">
+				<div class="formcontener">
+					<h3 style="text-decoration: underline;">VEHICLE DETAILS</h3>
+
+
+					<form action="#"
+						th:action="${dailyTripDetailsBean.tripId==0} ? @{/dailytrip/create-daily-trip} :  @{/dailytrip/updateDailyTrip?tripId={tripId}(tripId=${dailyTripDetailsBean.tripId})}"
+						th:object="${dailyTripDetailsBean}" method="POST">
+
+						<h1
+							th:text="${dailyTripDetailsBean.tripId!=0}   ? #{user.form.update} : #{user.form.add}"></h1>
+
+						<div class="row">
+							<div class="col-sm-6">
+
+
+								<div class="row left right top ">
+									<div class="col-sm-5  ">
+										<div class="content">
+											<label class="form-group" for="inputPassword"
+												th:text="#{trip.details.vehicle.pr.number}"></label>
+										</div>
+									</div>
+									<div class="col-sm-7">
+										<div class="content">
+											<input th:value="${dailyTripDetailsBean.vehicleId}"
+												type="text" th:field="*{vehicleId}" /> <label
+												th:if="${#fields.hasErrors('vehicleId')}"
+												th:text="#{error.}" th:class="'error'">Id Error</label>
+										</div>
+									</div>
+								</div>
+								<div class="row left right">
+									<div class="col-sm-5  ">
+										<div class="content">
+											<label class="form-group" for="inputPassword"
+												th:text="#{trip.details.drivery.licance.number}"></label>
+										</div>
+									</div>
+									<div class="col-sm-7">
+										<div class="content">
+											<input th:value="${dailyTripDetailsBean.driverId}"
+												type="text" th:field="*{driverId}" /> <label
+												th:if="${#fields.hasErrors('driverId')}" th:text="#{error.}"
+												th:class="'error'">Id Error</label>
+										</div>
+									</div>
+								</div>
+								<div class="row left right">
+									<div class="col-sm-5  ">
+										<div class="content">
+											<label class="form-group" for="inputPassword"
+												th:text="#{trip.details.date}"></label>
+										</div>
+									</div>
+									<div class="col-sm-7">
+										<div class="content">
+											<input th:value="${dailyTripDetailsBean.date}" type="date"
+												th:field="*{date}" /> <label
+												th:if="${#fields.hasErrors('date')}" th:text="#{error.}"
+												th:class="'error'">Id Error</label>
+
+										</div>
+									</div>
+								</div>
+
+								<div class="row left right">
+									<div class="col-sm-5  ">
+										<div class="content">
+											<label class="form-group" for="inputPassword"
+												th:text="#{trip.details.loding.place}"></label>
+										</div>
+									</div>
+									<div class="col-sm-7">
+										<div class="content">
+											<input th:value="${dailyTripDetailsBean.lodingPlace}"
+												type="text" th:field="*{lodingPlace}" /> <label
+												th:if="${#fields.hasErrors('lodingPlace')}"
+												th:text="#{error.}" th:class="'error'">Name Error</label>
+
+										</div>
+									</div>
+								</div>
+
+								<div class="row left right ">
+									<div class="col-sm-5  ">
+										<div class="content">
+											<label class="form-group" for="inputPassword"
+												th:text="#{trip.details.loding.metre.reading}"></label>
+										</div>
+									</div>
+									<div class="col-sm-7">
+										<div class="content">
+											<input th:value="${dailyTripDetailsBean.lodingMetreReading}"
+												type="text" th:field="*{lodingMetreReading}" /> <label
+												th:if="${#fields.hasErrors('lodingMetreReading')}"
+												th:text="#{error.}" th:class="'error'">Id Error</label>
+
+										</div>
+									</div>
+								</div>
+
+								<div class="row left right ">
+									<div class="col-sm-5  ">
+										<div class="content">
+											<label class="form-group" for="inputPassword"
+												th:text="#{trip.details.loding.time}"></label>
+										</div>
+									</div>
+									<div class="col-sm-7">
+										<div class="content">
+											<input th:value="${dailyTripDetailsBean.lodingTime}"
+												type="date" th:field="*{lodingTime}" /> <label
+												th:if="${#fields.hasErrors('lodingTime')}"
+												th:text="#{error.}" th:class="'error'">Id Error</label>
+
+										</div>
+									</div>
+								</div>
+
+
+								<div class="row left right ">
+									<div class="col-sm-5  ">
+										<div class="content">
+											<label class="form-group" for="inputPassword"
+												th:text="#{trip.details.unloding.place}"></label>
+										</div>
+									</div>
+									<div class="col-sm-7">
+										<div class="content">
+											<input th:value="${dailyTripDetailsBean.unlodingPlace}"
+												type="text" th:field="*{unlodingPlace}" /> <label
+												th:if="${#fields.hasErrors('unlodingPlace')}"
+												th:text="#{error.}" th:class="'error'">Name Error</label>
+
+										</div>
+									</div>
+								</div>
+
+								<div class="row left right ">
+									<div class="col-sm-5  ">
+										<div class="content">
+											<label class="form-group" for="inputPassword"
+												th:text="#{trip.details.unloding.metre.reading}"></label>
+										</div>
+									</div>
+									<div class="col-sm-7">
+										<div class="content">
+											<input
+												th:value="${dailyTripDetailsBean.unlodingMetreReading}"
+												type="text" th:field="*{unlodingMetreReading}" /> <label
+												th:if="${#fields.hasErrors('unlodingMetreReading')}"
+												th:text="#{error.}" th:class="'error'">Name Error</label>
+
+										</div>
+									</div>
+								</div>
+
+								<div class="row left right ">
+									<div class="col-sm-5  ">
+										<div class="content">
+											<label class="form-group" for="inputPassword"
+												th:text="#{trip.details.unloding.time}"></label>
+										</div>
+									</div>
+									<div class="col-sm-7">
+										<div class="content">
+											<input th:value="${dailyTripDetailsBean.unlodingTime}"
+												type="date" th:field="*{unlodingTime}" /> <label
+												th:if="${#fields.hasErrors('unlodingTime')}"
+												th:text="#{error.}" th:class="'error'">Name Error</label>
+										</div>
+									</div>
+								</div>
+
+
+
+								<div class="row left right ">
+									<div class="col-sm-5  ">
+										<div class="content">
+											<label class="form-group" for="inputPassword"
+												th:text="#{trip.details.material}"></label>
+										</div>
+									</div>
+									<div class="col-sm-7">
+										<div class="content">
+											<input th:value="${dailyTripDetailsBean.material}"
+												type="text" th:field="*{material}" /> <label
+												th:if="${#fields.hasErrors('material')}" th:text="#{error.}"
+												th:class="'error'">Id Error</label>
+
+										</div>
+									</div>
+								</div>
+
+								<div class="row left right bottom">
+									<div class="col-sm-5  ">
+										<div class="content">
+											<label class="form-group" for="inputPassword"
+												th:text="#{trip.details.refuiling.at}"></label>
+										</div>
+									</div>
+									<div class="col-sm-7">
+										<div class="content">
+											<input th:value="${dailyTripDetailsBean.refuilingAt}"
+												type="text" th:field="*{refuilingAt}" /> <label
+												th:if="${#fields.hasErrors('refuilingAt')}"
+												th:text="#{error.}" th:class="'error'">Name Error</label>
+
+										</div>
+									</div>
+								</div>
+
+								<input type="submit"
+									th:value="${dailyTripDetailsBean.tripId!=0}   ? #{user.form.update} : #{user.form.add}" />
+								<input type="reset" th:value="#{user.form.reset}" />
+							</div>
+							<div class="col-sm-6">
+								<div class="row left right top ">
+									<div class="col-sm-6 ">
+										<div class="content">
+											<label class="form-group" for="inputPassword">Password</label>
+										</div>
+									</div>
+									<div class="col-sm-6">
+										<div class="content"></div>
+									</div>
+								</div>
+							</div>
+							<button type="submit" class="btn btn-success">Submit</button>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+	<footer class="container-fluid">
+		<p>Footer Text</p>
+	</footer>
+	<script type="text/javascript"
+		src="webjars/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+</body>
+</html>

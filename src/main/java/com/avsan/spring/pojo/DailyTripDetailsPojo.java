@@ -36,16 +36,16 @@ public class DailyTripDetailsPojo {
 	private DriverDetailsPojo driverId;
 	
 	@Column(name = "date")
-	private Date date;
+	private String date;
 
 	@Column(name = "loding_place")
-	private String loding_place;
+	private String lodingPlace;
 	
 	@Column(name = "loding_metre_reading")
 	private int lodingMetreReading;
 	
 	@Column(name = "loding_time")
-	private Date lodingTime;
+	private String lodingTime;
 	
 	@Column(name = "unloding_place")
 	private String unlodingPlace;

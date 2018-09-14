@@ -19,11 +19,14 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.client.RestTemplate;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import com.avsan.spring.bean.DriverDetailsBean;
+import com.avsan.spring.bean.EmailRequest;
 import com.avsan.spring.bean.VehicleDetailsBean;
 import com.avsan.spring.pojo.DriverDetailsPojo;
 import com.avsan.spring.pojo.VehicleDetailsPojo;
@@ -40,6 +43,10 @@ public class DriverController {
 	private VehicleDetailsService vehicleDetailsService;
 	@GetMapping("create-user")
 	public ModelAndView createUserView() {
+		EmailRequest emailDetails =new EmailRequest();
+		 RestTemplate restTemplate = new RestTemplate();
+		// Object postForObject = restTemplate.postForObject("http://localhost:8081/emailDetails",emailDetails,Object.class);
+	        
 	    ModelAndView mav = new ModelAndView();
 	    mav.setViewName("createDriverDetails");
 	    mav.addObject("driverDetailsBean", new DriverDetailsBean());
@@ -49,6 +56,12 @@ public class DriverController {
 	@PostMapping("create-user")
 	public ModelAndView createUser(@Valid DriverDetailsBean driverDetailsBean, BindingResult result) {
 	    ModelAndView mav = new ModelAndView();
+	    if(result.hasErrors()) {
+			
+			  mav.setViewName("createDriverDetails");
+			   // mav.addObject("driverDetailsBean", driverDetailsBean);
+			return mav;
+		}
 	    DriverDetailsPojo driverDetailsPojo=new DriverDetailsPojo();
 	    driverDetailsPojo.setAddress(driverDetailsBean.getAddress());
 	    driverDetailsPojo.setAdharNumber(driverDetailsBean.getAdharNumber());
@@ -93,6 +106,7 @@ public class DriverController {
 		  driverDetailsBean.setContactNumber(driverDetailsPojo.getContactNumber());
 		  driverDetailsBean.setDescription(driverDetailsPojo.getDescription());
 		  driverDetailsBean.setDlScanedCopy(driverDetailsPojo.getDlScanedCopy());
+		  driverDetailsBean.setDriverId(driverDetailsPojo.getDriverId());
 		  driverDetailsBean.setDriverName(driverDetailsPojo.getDriverName());
 		  driverDetailsBean.setDriverPhotoCopy(driverDetailsPojo.getDriverPhotoCopy());
 		  driverDetailsBean.setDriveryLicanceNumber(driverDetailsPojo.getDriveryLicanceNumber());
@@ -104,66 +118,58 @@ public class DriverController {
 	  }
 	   ModelAndView mav = new ModelAndView();
 	    mav.setViewName("viewDriverDetails");
-	    mav.addObject("driverDetails", listDriverDetailsBean);
+	    mav.addObject("driverDetailsBean", listDriverDetailsBean);
 	    //mav.addObject("allProfiles", getProfiles());
 	    return mav;
 	
 	 }
-    /*@GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<DriverDetailsPojo> getDriverDetailsBeanById(@PathVariable("id") int id) {
-        System.out.println("Fetching DriverDetailsBean with id " + id);
-        DriverDetailsPojo DriverDetailsBean = DriverDetailsService.findById(id);
-        if (DriverDetailsBean == null) {
-            return new ResponseEntity<DriverDetailsPojo>(HttpStatus.NOT_FOUND);
-        }
-        return new ResponseEntity<DriverDetailsPojo>(DriverDetailsBean, HttpStatus.OK);
-    }
-    
-	 @PostMapping(value="/create",headers="Accept=application/json")
-	 public ResponseEntity<Void> createDriverDetailsBean(@RequestBody DriverDetailsPojo DriverDetailsBean, UriComponentsBuilder ucBuilder){
-	     System.out.println("Creating DriverDetailsBean "+DriverDetailsBean.getDriverName());
-	     DriverDetailsService.createDriverDetails(DriverDetailsBean);
-	     HttpHeaders headers = new HttpHeaders();
-	     headers.setLocation(ucBuilder.path("/DriverDetailsBean/{id}").buildAndExpand(DriverDetailsBean.getDriver_id()).toUri());
-	     return new ResponseEntity<Void>(headers, HttpStatus.CREATED);
-	 }
-
-	 @GetMapping(value="/get", headers="Accept=application/json")
-	 public List<DriverDetailsPojo> getAllDriverDetailsBean() {	 
-	  List<DriverDetailsPojo> tasks=DriverDetailsService.getDriverDetails();
-	  return tasks;
+	@PostMapping("updateDriver")
+	public ModelAndView updateDriver(@Valid DriverDetailsBean driverDetailsBean,@RequestParam("driverId") int driverId, BindingResult result) {
+	    ModelAndView mav = new ModelAndView();
+	    DriverDetailsPojo driverDetailsPojo=new DriverDetailsPojo();
+	    driverDetailsPojo.setAddress(driverDetailsBean.getAddress());
+	    driverDetailsPojo.setAdharNumber(driverDetailsBean.getAdharNumber());
+	    driverDetailsPojo.setAdharScanedCopy(driverDetailsBean.getAdharScanedCopy());
+	    driverDetailsPojo.setAlternateContactNumber(driverDetailsBean.getAlternateContactNumber());
+	    driverDetailsPojo.setContactNumber(driverDetailsBean.getContactNumber());
+	    driverDetailsPojo.setDescription(driverDetailsBean.getDescription());
+	    driverDetailsPojo.setDlScanedCopy(driverDetailsBean.getDlScanedCopy());
+	    driverDetailsPojo.setDriverName(driverDetailsBean.getDriverName());	
+	    driverDetailsPojo.setDriverPhotoCopy(driverDetailsBean.getDriverPhotoCopy());
+	    driverDetailsPojo.setDriveryLicanceNumber(driverDetailsBean.getDriveryLicanceNumber());
+	    driverDetailsPojo.setPreviouslyWorkedAt(driverDetailsBean.getPreviouslyWorkedAt());
+	    driverDetailsPojo.setVoterIdNumber(driverDetailsBean.getVoterIdNumber());
+	    driverDetailsPojo.setVoterScanedCopy(driverDetailsBean.getVoterScanedCopy());
+	    driverDetailsPojo.setYearsOfExperience(driverDetailsBean.getYearsOfExperience());
+	    driverDetailsService.update(driverDetailsPojo, driverId);
+	    mav.setViewName("user-info");
+	    return mav;
+    }	
+	@GetMapping("updateDriver")
+	 public ModelAndView viewUpdateDriver(@RequestParam("driverId") int driverId) {	 
+		  
+		DriverDetailsPojo driverDetailsPojo=driverDetailsService.findById(driverId);	
+		  DriverDetailsBean driverDetailsBean =new DriverDetailsBean();
+		  driverDetailsBean.setAddress(driverDetailsPojo.getAddress());
+		  driverDetailsBean.setAdharNumber(driverDetailsPojo.getAdharNumber());
+		  driverDetailsBean.setAdharScanedCopy(driverDetailsPojo.getAdharScanedCopy());
+		  driverDetailsBean.setAlternateContactNumber(driverDetailsPojo.getAlternateContactNumber());
+		  driverDetailsBean.setContactNumber(driverDetailsPojo.getContactNumber());
+		  driverDetailsBean.setDescription(driverDetailsPojo.getDescription());
+		  driverDetailsBean.setDlScanedCopy(driverDetailsPojo.getDlScanedCopy());
+		  driverDetailsBean.setDriverId(driverDetailsPojo.getDriverId());
+		  driverDetailsBean.setDriverName(driverDetailsPojo.getDriverName());
+		  driverDetailsBean.setDriverPhotoCopy(driverDetailsPojo.getDriverPhotoCopy());
+		  driverDetailsBean.setDriveryLicanceNumber(driverDetailsPojo.getDriveryLicanceNumber());
+		  driverDetailsBean.setPreviouslyWorkedAt(driverDetailsPojo.getPreviouslyWorkedAt());
+		  driverDetailsBean.setVoterIdNumber(driverDetailsPojo.getVoterIdNumber());
+		  driverDetailsBean.setVoterScanedCopy(driverDetailsPojo.getVoterScanedCopy());
+		  driverDetailsBean.setYearsOfExperience(driverDetailsPojo.getYearsOfExperience());
+		  ModelAndView mav = new ModelAndView();
+		  mav.setViewName("createDriverDetails");
+		  mav.addObject("driverDetailsBean", driverDetailsBean);
+	    return mav;
 	
 	 }
-
-	@PutMapping(value="/update", headers="Accept=application/json")
-	public ResponseEntity<String> updateDriverDetailsBean(@RequestBody DriverDetailsPojo currentDriverDetailsBean)
-	{
-		System.out.println("sd");
-	DriverDetailsPojo DriverDetailsBean = DriverDetailsService.findById(currentDriverDetailsBean.getDriver_id());
-	if (DriverDetailsBean==null) {
-		return new ResponseEntity<String>(HttpStatus.NOT_FOUND);
-	}
-	DriverDetailsService.update(currentDriverDetailsBean, currentDriverDetailsBean.getDriver_id());
-	return new ResponseEntity<String>(HttpStatus.OK);
-	}
-	
-	@DeleteMapping(value="/{id}", headers ="Accept=application/json")
-	public ResponseEntity<DriverDetailsPojo> deleteDriverDetailsBean(@PathVariable("id") int id){
-		DriverDetailsPojo DriverDetailsBean = DriverDetailsService.findById(id);
-		if (DriverDetailsBean == null) {
-			return new ResponseEntity<DriverDetailsPojo>(HttpStatus.NOT_FOUND);
-		}
-		DriverDetailsService.deleteDriverDetailsById(id);
-		return new ResponseEntity<DriverDetailsPojo>(HttpStatus.NO_CONTENT);
-	}
-	
-	@PatchMapping(value="/{id}", headers="Accept=application/json")
-	public ResponseEntity<DriverDetailsPojo> updateDriverDetailsBeanPartially(@PathVariable("id") int id, @RequestBody DriverDetailsPojo currentDriverDetailsBean){
-		DriverDetailsPojo DriverDetailsBean = DriverDetailsService.findById(id);
-		if(DriverDetailsBean ==null){
-			return new ResponseEntity<DriverDetailsPojo>(HttpStatus.NOT_FOUND);
-		}
-		DriverDetailsPojo usr =	DriverDetailsService.updatePartially(currentDriverDetailsBean, id);
-		return new ResponseEntity<DriverDetailsPojo>(usr, HttpStatus.OK);
-	}*/
+   
 }

@@ -24,22 +24,34 @@ public class InsurancePojo {
 	@Column(name = "ssno")
 	private int ssno;
 
-	/*@Column(name = "valid_from")
-	private Date validFrom;
+	@Column(name = "insurance_id")
+	private String insuranceId;
+	
+	@Column(name = "insurance_company")
+	private String insuranceCompany;
+	
+	@Column(name = "valid_from")
+	private String validFrom;
 	
 	@Column(name = "valid_to")
-	private Date validTo;
+	private String validTo;
 	
-	@Column(name = "value")
-	private String value;
+	@Column(name = "premium_paid")
+	private String premiumPaid;
 	
-	@Column(name = "certificate_image_path")
-	private String certificateImagePath;
+	@Column(name = "renewal_date")
+	private String renewalDate;
 	
 	@Column(name = "certificate_number")
 	private String certificateNumber;
 	
 	@Column(name = "certificate_type")
-	private String certificateType;*/
+	private String certificateType;
 	
+
+	@Column(name = "vechicle_pr_number",unique=true)// uk
+	private String vehiclePrNumber;
+	
+
+
 }

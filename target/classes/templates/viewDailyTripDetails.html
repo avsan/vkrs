@@ -1,0 +1,67 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>Spring Boot Thymeleaf + Spring Security</title>
+
+<div th:replace="fragments/header :: header-css" />
+
+</head>
+<body>
+	<div class="container">
+		<div th:replace="fragments/header :: header" />
+		<div class="starter-template">
+			<h1>tripDetails Information</h1>
+		</div>
+
+
+
+		<table class="table table-bordered">
+			<thead>
+				<tr>
+					<th th:text="#{trip.details.vehicle.pr.number}"></th>
+					<th th:text="#{trip.details.drivery.licance.number}"></th>
+					<th th:text="#{trip.details.date}"></th>
+					<th th:text="#{trip.details.loding.place}"></th>
+					<th th:text="#{trip.details.loding.metre.reading}"></th>
+					<th th:text="#{trip.details.loding.time}"></th>
+					<th th:text="#{trip.details.unloding.place}"></th>
+					<th th:text="#{trip.details.unloding.metre.reading}"></th>
+					<th th:text="#{trip.details.unloding.time}"></th>
+					<th th:text="#{trip.details.material}"></th>
+					<th th:text="#{trip.details.refuiling.at}"></th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="tripDetails : ${dailyTripDetailsBean}">
+					<td th:text="${tripDetails.vehicleId}"></td>
+
+					<td th:text="${tripDetails.driverId}"></td>
+
+					<td th:text="${tripDetails.date}" />
+
+					<td th:text="${tripDetails.lodingPlace}" />
+
+					<td th:text="${tripDetails.lodingMetreReading}" />
+
+					<td th:text="${tripDetails.lodingTime}" />
+
+					<td th:text="${tripDetails.unlodingPlace}" />
+
+					<td th:text="${tripDetails.unlodingMetreReading}" />
+					<td th:text="${tripDetails.unlodingTime}" />
+
+					<td th:text="${tripDetails.material}" />
+
+					<td th:text="${tripDetails.refuilingAt}" />
+					<td><a
+						th:href=" @{/dailytrip/updateDailyTrip?tripId={tripId}(tripId=${tripDetails.tripId})}">Edit</a>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+	<script type="text/javascript"
+		src="../webjars/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+</body>
+</html>

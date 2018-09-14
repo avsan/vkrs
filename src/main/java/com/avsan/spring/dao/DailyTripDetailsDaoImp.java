@@ -2,72 +2,35 @@ package com.avsan.spring.dao;
 
 import java.util.List;
 
+import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.avsan.spring.bean.DailyTripDetailsBean;
+import com.avsan.spring.pojo.DailyTripDetailsPojo;
 @Repository
-public class DailyTripDetailsDaoImp {/*implements DailyTripDetailsDao{
+public class DailyTripDetailsDaoImp implements DailyTripDetailsDao{
+	
 	@Autowired
 	private SessionFactory sessionFactory;
 
-	@Override
-	public void addDailyTripDetails(DailyTripDetailsBean dailyTripDetails) {
-		// TODO Auto-generated method stub
-		
-	}
 
-	@Override
-	public List<DailyTripDetailsBean> getDailyTripDetails() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public DailyTripDetailsBean findById(int id) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public DailyTripDetailsBean update(DailyTripDetailsBean dailyTripDetails, int id) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public DailyTripDetailsBean updateCountry(DailyTripDetailsBean dailyTripDetails, int id) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public void delete(int id) {
-		// TODO Auto-generated method stub
-		
-	}
-	  
-	public void addDailyTripDetails(DailyTripDetailsBean dailyTripDetails) {
-		// TODO Auto-generated method stub
-		 Session session = sessionFactory.getCurrentSession();
-		  session.save(dailyTripDetails); 
-	}
-
-	public List<DailyTripDetailsBean> getDailyTripDetails() {
+	public List<DailyTripDetailsPojo> getDailyTripDetails() {
 		// TODO Auto-generated method stub
 		 Session session = sessionFactory.getCurrentSession();
 		@SuppressWarnings("unchecked")
-		List<DailyTripDetailsBean> list= session.createCriteria(DailyTripDetailsBean.class).list();
+		List<DailyTripDetailsPojo> list= session.createCriteria(DailyTripDetailsPojo.class).list();
 		return list;
 	}
 
-	public DailyTripDetailsBean findById(int id) {
+	public DailyTripDetailsPojo findById(int id) {
 		// TODO Auto-generated method stub
 		 Session session = sessionFactory.getCurrentSession();
-		DailyTripDetailsBean DailyTripDetailsBean=(DailyTripDetailsBean) session.get(DailyTripDetailsBean.class,id);
-		return DailyTripDetailsBean;
+		 DailyTripDetailsPojo dailyTripDetails=(DailyTripDetailsPojo) session.get(DailyTripDetailsPojo.class,id);
+		return dailyTripDetails;
 	}
 
 	public DailyTripDetailsBean update(DailyTripDetailsBean val, int id) {
@@ -82,14 +45,41 @@ public class DailyTripDetailsDaoImp {/*implements DailyTripDetailsDao{
 	public void delete(int id) {
 		// TODO Auto-generated method stub
 		Session session = sessionFactory.getCurrentSession();
-		DailyTripDetailsBean DailyTripDetailsBean = findById(id);
-		session.delete(DailyTripDetailsBean);
+		DailyTripDetailsPojo dailyTripDetailsPojo = findById(id);
+		session.delete(dailyTripDetailsPojo);
 	}
-	@Override
-	public DailyTripDetailsBean updateCountry(DailyTripDetailsBean val, int id){
-		Session session = sessionFactory.getCurrentSession();
-		DailyTripDetailsBean DailyTripDetailsBean = (DailyTripDetailsBean)session.load(DailyTripDetailsBean.class, id);
-		return DailyTripDetailsBean;
-	}*/
 
+	@Override
+	public void addDailyTripDetails(DailyTripDetailsPojo dailyTripDetails) {
+		Session session = sessionFactory.getCurrentSession();
+		session.save(dailyTripDetails); 	
+		
+	}
+
+
+	@Override
+	public DailyTripDetailsPojo update(DailyTripDetailsPojo dailyTripDetails, int tripId) {
+		Session session = sessionFactory.getCurrentSession();
+		dailyTripDetails.setTripId(tripId);
+		session.saveOrUpdate(dailyTripDetails);
+		return dailyTripDetails;
+	}
+
+	@Override
+	public DailyTripDetailsPojo updateCountry(DailyTripDetailsPojo dailyTripDetails, int id) {
+		Session session = sessionFactory.getCurrentSession();
+		DailyTripDetailsPojo dailyTrip = (DailyTripDetailsPojo)session.load(DailyTripDetailsPojo.class, id);
+		return dailyTrip;
+	}
+
+	@Override
+	public List<DailyTripDetailsPojo> getDailyTripDetailsByDate(String fromDate, String toDate) {
+		 Session session = sessionFactory.getCurrentSession();
+		 Criteria criteria = session.createCriteria(DailyTripDetailsPojo.class);
+		
+	criteria.add(Restrictions.between("lodingTime", fromDate, toDate));
+			return criteria.list();
+	}
+
+	
 }

@@ -12,4 +12,6 @@ public interface DailyTripDetailsService {
 	public DailyTripDetailsPojo update(DailyTripDetailsPojo dailyTripDetails, int id);
 	public void deleteDailyTripDetailsById(int id);
 	public DailyTripDetailsPojo updatePartially(DailyTripDetailsPojo dailyTripDetails, int id);
+	public List<DailyTripDetailsPojo> getDailyTripDetailsByDate(String fromDate,String toDate);
+	
 }

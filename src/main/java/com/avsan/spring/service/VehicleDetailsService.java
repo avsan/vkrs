@@ -11,4 +11,5 @@ public interface VehicleDetailsService {
 	public VehicleDetailsPojo update(VehicleDetailsPojo vehicleDetails, int id);
 	public void deleteVehicleDetailsById(int id);
 	public VehicleDetailsPojo updatePartially(VehicleDetailsPojo vehicleDetails, int id);
+	public int findVehicleIdByVehiclePrNumber(String vehiclePrNumber);
 }

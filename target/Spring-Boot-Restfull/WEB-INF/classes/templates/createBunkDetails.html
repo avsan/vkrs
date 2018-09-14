@@ -1,0 +1,86 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>Spring Boot Thymeleaf + Spring Security</title>
+
+<div th:replace="fragments/header :: header-css" />
+
+</head>
+<body>
+
+
+
+	<div class="container">
+		<div th:replace="fragments/header :: header" />
+		<div class="starter-template">
+			<h1>Driver Information</h1>
+		</div>
+
+
+		<!-- /.container -->
+
+		<form action="#"
+			th:action="${bunkDetailsBean.bunkId==0} ? @{/bunkdetails/create-bunk} :  @{/bunkdetails/updateBunk?bunkId={bunkId}(bunkId=${bunkDetailsBean.bunkId})}"
+			th:object="${bunkDetailsBean}" method="POST">
+			<h1 th:text="#{app.create-user}" th:unless="${bunkDetailsBean!=null}">Create</h1>
+			<h1
+				th:text="${bunkDetailsBean.bunkId!=0}? #{user.form.add} : #{app.create-user}">Update</h1>
+
+			<table>
+				<tr>
+					<td th:text="#{bunk.name}"></td>
+					<td><input th:value="${bunkDetailsBean.bunkName}" type="text"
+						th:field="*{bunkName}" /> <label
+						th:if="${#fields.hasErrors('bunkName')}" th:text="#{error.}"
+						th:class="'error'">Id Error</label></td>
+				</tr>
+				<tr>
+					<td th:text="#{bunk.address}"></td>
+					<td><input th:value="${bunkDetailsBean.bunkAddress}"
+						type="text" th:field="*{bunkAddress}" /> <label
+						th:if="${#fields.hasErrors('bunkAddress')}" th:text="#{error.}"
+						th:class="'error'">Name Error</label></td>
+				</tr>
+				<tr>
+					<td th:text="#{contact.number}"></td>
+					<td><input th:value="${bunkDetailsBean.contactNumber}"
+						type="text" th:field="*{contactNumber}" /> <label
+						th:if="${#fields.hasErrors('contactNumber')}" th:text="#{error.}"
+						th:class="'error'">Name Error</label></td>
+				</tr>
+				<tr>
+					<td th:text="#{alternate.contact.number}"></td>
+					<td><input
+						th:value="${bunkDetailsBean.alternateContactNumber}" type="text"
+						th:field="*{alternateContactNumber}" /> <label
+						th:if="${#fields.hasErrors('alternateContactNumber')}"
+						th:text="#{error.}" th:class="'error'">Id Error</label></td>
+				</tr>
+				<tr>
+					<td th:text="#{active}"></td>
+					<td><input th:value="${bunkDetailsBean.active}" type="text"
+						th:field="*{active}" /> <label
+						th:if="${#fields.hasErrors('active')}" th:text="#{error.}"
+						th:class="'error'">Name Error</label></td>
+				</tr>
+				<tr>
+					<td th:text="#{description}"></td>
+					<td><input th:value="${bunkDetailsBean.description}"
+						type="text" th:field="*{description}" /> <label
+						th:if="${#fields.hasErrors('description')}" th:text="#{error.}"
+						th:class="'error'">Id Error</label></td>
+				</tr>
+				<tr>
+					<td colspan="2"><input type="submit"
+						th:value="${bunkDetailsBean.bunkId!=0}  ? #{user.form.update} : #{user.form.add}" />
+						<!--   <input type="submit" th:value="#{user.form.submit}"/>  -->
+						<input type="reset" th:value="#{user.form.reset}" /></td>
+				</tr>
+			</table>
+		</form>
+	</div>
+	<script type="text/javascript"
+		src="../webjars/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+</body>
+</html>

@@ -42,5 +42,9 @@ public class VehicleDetailsServiceImp implements VehicleDetailsService {
 	public VehicleDetailsPojo update(VehicleDetailsPojo vehicleDetails,int id) {
 		return vehicleDetailsDao.update(vehicleDetails, id);
 	}
+	@Override
+	public int findVehicleIdByVehiclePrNumber(String vehiclePrNumber) {
+		return vehicleDetailsDao.findVehicleIdByVehiclePrNumber(vehiclePrNumber);
+	}
 
 }

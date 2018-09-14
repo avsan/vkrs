@@ -1,39 +1,28 @@
 package com.avsan.spring.bean;
 
-import java.util.Date;
-
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
-
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import org.springframework.stereotype.Service;
 
 import lombok.Data;
 
 @Data
 public class InsuranceBean {
-	
 	private int ssno;
 	
-	/*@Column(name = "valid_from")
-	private Date validFrom;
+	private String insuranceId;
 	
-	@Column(name = "valid_to")
-	private Date validTo;
+	private String insuranceCompany;
 	
-	@Column(name = "value")
-	private String value;
+	private String validFrom;
 	
-	@Column(name = "certificate_image_path")
-	private String certificateImagePath;
+	private String validTo;
 	
-	@Column(name = "certificate_number")
+	private String premiumPaid;
+	
+	private String renewalDate;
+	
 	private String certificateNumber;
 	
-	@Column(name = "certificate_type")
-	private String certificateType;*/
+	private String certificateType;
+	
 	
 }

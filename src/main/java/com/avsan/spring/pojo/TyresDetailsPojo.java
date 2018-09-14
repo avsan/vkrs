@@ -19,25 +19,36 @@ public class TyresDetailsPojo {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE)//, generator = "tyres_details_sequence")
-	@Column(name = "bunk_id")
-	private int bunkId;
+	@Column(name = "tyre_id")
+	private int tyreId;
 
-	@Column(name = "bunk_name")
-	private String bunkName;
+	@Column(name = "tyre_model")
+	private String tyreModel;
 	
-	@Column(name = "bunk_address")
-	private String bunkAddress;
+	@Column(name = "tyre_company")
+	private String tyreCompany;
 	
-	@Column(name = "contect_number")
-	private String contectNumber;
+	@Column(name = "tyres_purchased_from")
+	private String tyresPurchasedFrom;
 
-	@Column(name = "alternate_contect_number")
-	private String alternateContectNumber;
+	@Column(name = "purchase_Date")
+	private String purchaseDate;
+	
+	@Column(name = "odometer_reading_at_tyre_change")
+	private String odometerReadingAtTyreChange;
+	
+	@Column(name = "cost_per_tyre")
+	private String costPerTyre;
+	
+	@Column(name = "no_of_tyres_changed")
+	private String noOfTyresChanged;
+	
+	@Column(name = "purchase_bill_no")
+	private String purchaseBillNo;
+	
+	@Column(name = "housing_type")
+	private String housingType;
 	
 	@Column(name = "description")
 	private String description;
-	
-	@Column(name = "active")
-	private String active;
-	
 }

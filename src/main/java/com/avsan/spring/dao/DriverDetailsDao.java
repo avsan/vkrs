@@ -9,6 +9,7 @@ public interface DriverDetailsDao {
 	public void addDriverDetails(DriverDetailsPojo driverDetails);
 	public List<DriverDetailsPojo> getDriverDetails();
 	public DriverDetailsPojo findById(int id);
+	public int findDriverIdByDriveryLicanceNumber(String driveryLicanceNumber);
 	public DriverDetailsPojo update(DriverDetailsPojo driverDetails, int id);
 	public DriverDetailsPojo updateCountry(DriverDetailsPojo driverDetails, int id);
 	public void delete(int id);

@@ -1,6 +1,43 @@
-<!DOCTYPE HTML>
+<!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
+<style>
+/* The Modal (background) */
+.modal {
+	display: none; /* Hidden by default */
+	position: fixed; /* Stay in place */
+	z-index: 1; /* Sit on top */
+	padding-top: 100px; /* Location of the box */
+	left: 0;
+	top: 0;
+	width: 100%; /* Full width */
+	height: 100%; /* Full height */
+	overflow: auto; /* Enable scroll if needed */
+	background-color: rgb(0, 0, 0); /* Fallback color */
+	background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
+}
+/* Modal Content */
+.modal-content {
+	background-color: #fefefe;
+	margin: auto;
+	padding: 20px;
+	border: 1px solid #888;
+	width: 40%;
+}
+/* The Close Button */
+.close {
+	color: #aaaaaa;
+	float: right;
+	font-size: 28px;
+	font-weight: bold;
+}
+
+.close:hover, .close:focus {
+	color: #000;
+	text-decoration: none;
+	cursor: pointer;
+}
+</style>
 <title>Spring Boot Thymeleaf Hello World Example</title>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 
@@ -9,103 +46,277 @@
 
 <link rel="stylesheet" th:href="@{/css/main.css}"
 	href="../../css/main.css" />
-	
-	
+
+
 <script>
 function upload(vehicle) {
-  alert("Abhishek  "+vehicle);
+
+  alert("Abhishek  "+JSON.stringify(vehicle ));
+  $("input").removeAttr("readonly");  
+    
+    alert("Abhishek  "+vehicle.nameOfOwner);
 }
 </script>
 
 </head>
 <body>
-
-	<nav class="navbar navbar-inverse">
-		<div class="container">
-			<div class="navbar-header">
-				<a class="navbar-brand" href="#">Spring Boot</a>
-			</div>
-			<div id="navbar" class="collapse navbar-collapse">
-				<ul class="nav navbar-nav">
-					<li class="active"><a href="#">Home</a></li>
-					<li><a href="#about">About</a></li>
-				</ul>
-			</div>
-		</div>
-	</nav>
-
 	<div class="container">
-
+		<div th:replace="fragments/header :: header" />
 		<div class="starter-template">
 			<h1>Vehicle Information</h1>
 		</div>
 
+
+
+		<table class="table table-bordered">
+			<thead>
+				<tr>
+					<th th:text="#{vehicle.pr.number}"></th>
+					<th th:text="#{name.of.owner}"></th>
+					<th th:text="#{chesis.number}"></th>
+					<th th:text="#{engine.number}"></th>
+					<th th:text="#{cubic.capacity}"></th>
+					<th th:text="#{full.weight.capacity}"></th>
+					<th th:text="#{unloaded.weight}"></th>
+					<th th:text="#{oil.tank.capacity}"></th>
+					<th th:text="#{vehicle.color}"></th>
+					<th th:text="#{date.of.registration}"></th>
+					<th th:text="#{registration.valid.upto}"></th>
+					<th th:text="#{payed.tax}"></th>
+					<th th:text="#{company.warranty.details}"></th>
+					<th th:text="#{warranty.valid.upto}"></th>
+					<th th:text="#{description}"></th>
+
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="vehicle : ${vehicleDetails}">
+					<td><input type="text" name="vehiclePrNumber"
+						th:value="${vehicle.vehiclePrNumber}"
+						style="border: none; border-width: 0px" readonly="readonly" /></td>
+
+					<td><input type="text" name="nameOfOwner"
+						th:value="${vehicle.nameOfOwner}"
+						style="border: none; border-width: 0px" readonly="readonly" /></td>
+
+					<td><input type="text" name="chesisNumber"
+						th:value="${vehicle.chesisNumber}"
+						style="border: none; border-width: 0px" readonly="readonly" /></td>
+
+					<td><input type="text" name="engineNumber"
+						th:value="${vehicle.engineNumber}"
+						style="border: none; border-width: 0px" readonly="readonly" /></td>
+
+					<td><input type="text" name="cubicCapacity"
+						th:value="${vehicle.cubicCapacity}"
+						style="border: none; border-width: 0px" readonly="readonly" /></td>
+
+					<td><input type="text" name="fullWeightCapacity"
+						th:value="${vehicle.fullWeightCapacity}"
+						style="border: none; border-width: 0px" readonly="readonly" /></td>
+
+					<td><input type="text" name="unloadedWeight"
+						th:value="${vehicle.unloadedWeight}"
+						style="border: none; border-width: 0px" readonly="readonly" /></td>
+
+					<td><input type="text" name="oilTankCapacity"
+						th:value="${vehicle.oilTankCapacity}"
+						style="border: none; border-width: 0px" readonly="readonly" /></td>
+					<td><input type="text" name="vehicleColor"
+						th:value="${vehicle.vehicleColor}"
+						style="border: none; border-width: 0px" readonly="readonly" /></td>
+
+					<td><input type="text" name="dateOfRegistration"
+						th:value="${vehicle.dateOfRegistration}"
+						style="border: none; border-width: 0px" readonly="readonly" /></td>
+
+					<td><input type="text" name="registrationValidupto"
+						th:value="${vehicle.registrationValidupto}"
+						style="border: none; border-width: 0px" readonly="readonly" /></td>
+
+					<td><input type="text" name="payedTax"
+						th:value="${vehicle.payedTax}"
+						style="border: none; border-width: 0px" readonly="readonly" /></td>
+
+					<td><input type="text" name="companyWarrantyDetails"
+						th:value="${vehicle.companyWarrantyDetails}"
+						style="border: none; border-width: 0px" readonly="readonly" /></td>
+
+					<td><input type="text" name="warrantyValidUpTo"
+						th:value="${vehicle.warrantyValidUpTo}"
+						style="border: none; border-width: 0px" readonly="readonly" /></td>
+
+					<td><input type="text" name="description"
+						th:value="${vehicle.description}"
+						style="border: none; border-width: 0px" readonly="readonly" /></td>
+					<td><button th:onclick="@{/vehicledetails/addVehicle}">Click</button>
+					</td>
+					<td><button
+							th:onclick="'javascript:upload(\''+ ${vehicle} +'\');'">Click</button>
+					</td>
+					<td><input type="submit" th:value="#{user.form.submit}" /> <a
+						th:href="@{/vehicledetails/updateVehicle?vehicleId={vehicleId}(vehicleId=${vehicle.vehicleId})}">Edit</a>
+
+					</td>
+
+				</tr>
+
+			</tbody>
+		</table>
+
+	</div>
+	<h2 align="center">User Example</h2>
+
+	<!-- Trigger/Open The Modal -->
+	<div align="center">
+		<button id="myBtn">Add User</button>
+		<br /> <br />
+		<button id="myBtn1">Get User</button>
 	</div>
 
-<table class="table table-bordered">
-<thead>
-	      <tr>
-	      	<th th:text="#{vehicle.pr.number}"></th>
-			<th th:text="#{name.of.owner}"></th>
-			<th th:text="#{chesis.number}"></th>
-			<th th:text="#{engine.number}"></th>
-			<th th:text="#{cubic.capacity}"></th>
-			<th th:text="#{full.weight.capacity}"></th>
-			<th th:text="#{unloaded.weight}"></th>
-			<th th:text="#{oil.tank.capacity}"></th>
-			<th th:text="#{vehicle.color}"></th>
-			<th th:text="#{date.of.registration}"></th>
-			<th th:text="#{registration.valid.upto}"></th>
-			<th th:text="#{payed.tax}"></th>
-			<th th:text="#{company.warranty.details}"></th>
-			<th th:text="#{warranty.valid.upto}"></th>
-			<th th:text="#{description}"></th>
+	<!-- The Modal -->
+	<div id="myModal" class="modal">
+		<!-- Modal content -->
+		<div class="modal-content">
+			<span class="close">&times;</span>
+			<form action="#" th:action="@{/vehicledetails/addVehicle}"
+				th:object="${vehicleDetailsBean}" method="POST">
+				<table>
+					<tr>
+						<td th:text="#{vehicle.pr.number}"></td>
+						<td><input type="text" name="1" /></td>
+					</tr>
+					<tr>
+						<td th:text="#{name.of.owner}"></td>
+						<td><input type="text" name="2" /></td>
+					</tr>
+					<tr>
+						<td th:text="#{chesis.number}"></td>
+						<td><input type="text" name="3" /></td>
+					</tr>
+					<tr>
+						<td th:text="#{engine.number}"></td>
+						<td><input type="text" name="4" /></td>
+					</tr>
+					<tr>
+						<td th:text="#{cubic.capacity}"></td>
+						<td><input type="text" name="5" /></td>
+					</tr>
+					<tr>
+						<td th:text="#{full.weight.capacity}"></td>
+						<td><input type="text" name="6" /></td>
+					</tr>
+					<tr>
+						<td th:text="#{unloaded.weight}"></td>
+						<td><input type="text" name="7" /></td>
+					</tr>
+					<tr>
+						<td th:text="#{oil.tank.capacity}"></td>
+						<td><input type="text" name="8" /></td>
+					</tr>
+					<tr>
+						<td th:text="#{vehicle.color}"></td>
+						<td><input type="text" name="9" /></td>
+					</tr>
+					<tr>
+						<td th:text="#{date.of.registration}"></td>
+						<td><input type="date" name="10" /></td>
+					</tr>
+					<tr>
+						<td th:text="#{registration.valid.upto}"></td>
+						<td><input type="date" name="11" /></td>
+					</tr>
+					<tr>
+						<td th:text="#{payed.tax}"></td>
+						<td><input type="text" name="12" /></td>
+					</tr>
+					<tr>
+						<td th:text="#{company.warranty.details}"></td>
+						<td><input type="text" name="13" /></td>
+					</tr>
+					<tr>
+						<td th:text="#{warranty.valid.upto}"></td>
+						<td><input type="date" name="14" /></td>
+					</tr>
+					<tr>
+						<td th:text="#{description}"></td>
+						<td><input type="text" name="15" /></td>
+					</tr>
 
-	    	</tr>
-	    	</thead>
-	    	<tbody>
-	    		<tr  th:each="vehicle : ${vehicleDetails}">
-	    	       <td th:text="${vehicle.vehiclePrNumber}" ></td>
-	    	
-	    	      <td th:text="${vehicle.nameOfOwner}" ></td>
-	 
-	    	       <td th:text="${vehicle.chesisNumber}" />
-	    	      
-	    	      <td th:text="${vehicle.engineNumber}" />
-	    	      
-	    	       <td th:text="${vehicle.cubicCapacity}" />
-	    	     
-	    	      <td th:text="${vehicle.fullWeightCapacity}" />
-	    	      
-	    	       <td th:text="${vehicle.unloadedWeight}" />
-	    	       
-	    	      <td th:text="${vehicle.oilTankCapacity}" />
-	    	      <td th:text="${vehicle.vehicleColor}" />
-	    	   
-	    	      <td th:text="${vehicle.dateOfRegistration}" />
-	    	     
-	    	       <td th:text="${vehicle.registrationValidupto}" />
-	    	      
-	    	      <td th:text="${vehicle.payedTax}" />
-	    	     
-	    	       <td th:text="${vehicle.companyWarrantyDetails}" />
-	    	      
-	    	      <td th:text="${vehicle.warrantyValidUpTo}" />
-	    	      
-	    	       <td th:text="${vehicle.description}" />
-	    	       <td><button th:onclick="@{/vehicledetails/addVehicle}">Click</button>  </td>
-	              <td><button th:onclick="'javascript:upload(\''+ ${vehicle} +'\');'">Click</button>  </td>
-	              <td><input type="submit" th:value="#{user.form.submit}"/> 
-	              <a href="/vehicledetails/addVehicle">Home</a>
-	              
-	                </td>
-	          
-	        </tr> 
-	        
-	        </tbody>
-	      </table>  
+					<tr>
+						<td colspan="2"><input type="submit"
+							th:value="#{user.form.submit}" /> <input type="reset"
+							th:value="#{user.form.reset}" /></td>
+					</tr>
+				</table>
+				<center>
+					<input type="submit" value="AddUser" />
+				</center>
+			</form>
+
+		</div>
+
+	</div>
+
+	<!-- section 2 -->
+	<div id="mySearch" class="modal">
+		<!-- Modal content -->
+		<div class="modal-content">
+			<span class="close">&times;</span>
+			<form action="/getUserbyId">
+				<table style="padding: 5px; text-align: center;" align="center">
+					<tr>
+						<td>Name :</td>
+						<td><input type="text" name="name" placeholder="Name" /></td>
+					</tr>
+				</table>
+				<center>
+					<input type="submit" value="find" />
+				</center>
+			</form>
+
+		</div>
+
+	</div>
+
+	<script>
+		var modal = document.getElementById('myModal');
+		var btn = document.getElementById("myBtn");
+		var span = document.getElementsByClassName("close")[0];
+		btn.onclick = function() {
+			modal.style.display = "block";
+		}
+		span.onclick = function() {
+			modal.style.display = "none";
+		}
+		window.onclick = function(event) {
+			if (event.target == modal) {
+				modal.style.display = "none";
+			}
+		}
+		//2
+		var searchModel = document.getElementById('mySearch');
+		var btn1 = document.getElementById("myBtn1");
+		var span1 = document.getElementsByClassName("close")[0];
+		btn1.onclick = function() {
+			searchModel.style.display = "block";
+		}
+		span1.onclick = function() {
+			searchModel.style.display = "none";
+		}
+		window.onclick = function(event) {
+			if (event.target == searchModel) {
+				searchModel.style.display = "none";
+			}
+		}
+	</script>
+
 	<script type="text/javascript"
 		src="../webjars/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	<script type="text/javascript"
+		src="../webjars/jquery/3.2.0/jquery.min.js"></script>
+
+
 
 </body>
 </html>

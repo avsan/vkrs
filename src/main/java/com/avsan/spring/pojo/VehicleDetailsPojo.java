@@ -72,7 +72,7 @@ public class VehicleDetailsPojo {
 	
 	
 	@Column(name = "description")
-	private double description;
+	private String description;
 	
 	@OneToMany(mappedBy = "vehicleId")
 	private Set<DailyTripDetailsPojo> dailyTripDetails;

@@ -1,0 +1,49 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>Spring Boot Thymeleaf + Spring Security</title>
+
+<div th:replace="fragments/header :: header-css" />
+
+</head>
+<body>
+	<div class="container">
+		<div th:replace="fragments/header :: header" />
+		<div class="starter-template">
+			<h1>Driver Information</h1>
+		</div>
+
+
+		<!-- /.container -->
+		<form action="dailytrip/viewDailyTrip1"
+			th:object="${report}" method="POST">
+
+			<h1>Report</h1>
+			<table>
+					<tr>
+					<td th:text="#{trip.details.loding.time}"></td>
+					<td><input th:value="${report.fromDate}"
+						type="date" th:field="*{fromDate}" /> <label
+						th:if="${#fields.hasErrors('fromDate')}" th:text="#{error.}"
+						th:class="'error'">Id Error</label></td>
+				</tr>
+				<tr>
+					<td th:text="#{trip.details.unloding.time}"></td>
+					<td><input th:value="${report.toDate}"
+						type="date" th:field="*{toDate}" /> <label
+						th:if="${#fields.hasErrors('toDate')}" th:text="#{error.}"
+						th:class="'error'">Name Error</label></td>
+				</tr>
+				
+				<tr>
+					<td colspan="2"><input type="submit" value="Submit"/>
+						<input type="reset" th:value="#{user.form.reset}" /></td>
+				</tr>
+			</table>
+		</form>
+	</div>
+	<script type="text/javascript"
+		src="../webjars/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+</body>
+</html>

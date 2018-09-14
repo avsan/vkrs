@@ -1,0 +1,122 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>Spring Boot Thymeleaf + Spring Security</title>
+
+<div th:replace="fragments/header :: header-css" />
+
+</head>
+<body>
+	<div class="container">
+		<div th:replace="fragments/header :: header" />
+		<div class="starter-template">
+			<h1>Driver Information</h1>
+		</div>
+
+
+		<!-- /.container -->
+		<form action="#"
+			th:action="${fuelDetailsBean.slno==0} ? @{/fueldetails/fuelEntry} :  @{/fueldetails/updateFuelEntry?slno={slno}(slno=${fuelDetailsBean.slno})}"
+			th:object="${fuelDetailsBean}" method="POST">
+
+			<h1
+				th:text="${fuelDetailsBean.slno!=0}   ? #{user.form.update} : #{user.form.add}"></h1>
+			<table>
+				<tr>
+					<td th:text="#{fuel.cardNumber}"></td>
+					<td><input th:value="${fuelDetailsBean.cardNumber}"
+						type="text" th:field="*{cardNumber}" /> <label
+						th:if="${#fields.hasErrors('cardNumber')}" th:text="#{error.}"
+						th:class="'error'">Id Error</label></td>
+				</tr>
+				<tr>
+					<td th:text="#{fuel.vehicle_id}"></td>
+					<td><input th:value="${fuelDetailsBean.vehicleId}"
+						type="text" th:field="*{vehicleId}" /> <label
+						th:if="${#fields.hasErrors('vehicleId')}" th:text="#{error.}"
+						th:class="'error'">Id Error</label></td>
+				</tr>
+				<tr>
+					<td th:text="#{fuel.driver_id}"></td>
+					<td><input th:value="${fuelDetailsBean.driverId}" type="text"
+						th:field="*{driverId}" /> <label th:if="${#fields.hasErrors('driverId')}"
+						th:text="#{error.}" th:class="'error'">Id Error</label></td>
+				</tr>
+				<tr>
+					<td th:text="#{fuel.incharge}"></td>
+					<td><input th:value="${fuelDetailsBean.incharge}"
+						type="text" th:field="*{incharge}" /> <label
+						th:if="${#fields.hasErrors('incharge')}" th:text="#{error.}"
+						th:class="'error'">Name Error</label></td>
+				</tr>
+				<tr>
+					<td th:text="#{fuel.oilFillingDateAndTime}"></td>
+					<td><input
+						th:value="${fuelDetailsBean.oilFillingDateAndTime}" type="text"
+						th:field="*{oilFillingDateAndTime}" /> <label
+						th:if="${#fields.hasErrors('oilFillingDateAndTime')}"
+						th:text="#{error.}" th:class="'error'">Id Error</label></td>
+				</tr>
+				<tr>
+					<td th:text="#{fuel.metreReading}"></td>
+					<td><input th:value="${fuelDetailsBean.metreReading}"
+						type="text" th:field="*{metreReading}" /> <label
+						th:if="${#fields.hasErrors('metreReading')}" th:text="#{error.}"
+						th:class="'error'">Id Error</label></td>
+				</tr>
+				<tr>
+					<td th:text="#{fuel.ltr}"></td>
+					<td><input th:value="${fuelDetailsBean.ltr}"
+						type="text" th:field="*{ltr}" /> <label
+						th:if="${#fields.hasErrors('ltr')}" th:text="#{error.}"
+						th:class="'error'">Name Error</label></td>
+				</tr>
+				<tr>
+					<td th:text="#{fuel.rate}"></td>
+					<td><input
+						th:value="${fuelDetailsBean.rate}"
+						type="text" th:field="*{rate}" /> <label
+						th:if="${#fields.hasErrors('rate')}"
+						th:text="#{error.}" th:class="'error'">Name Error</label></td>
+				</tr>
+				<tr>
+					<td th:text="#{fuel.fuelType}"></td>
+					<td><input th:value="${fuelDetailsBean.fuelType}"
+						type="text" th:field="*{fuelType}" /> <label
+						th:if="${#fields.hasErrors('fuelType')}" th:text="#{error.}"
+						th:class="'error'">Name Error</label></td>
+				</tr>
+				<tr>
+					<td th:text="#{fuel.bunkId}"></td>
+					<td><input th:value="${fuelDetailsBean.bunkId}"
+						type="text" th:field="*{bunkId}" /> <label
+						th:if="${#fields.hasErrors('bunkId')}" th:text="#{error.}"
+						th:class="'error'">Id Error</label></td>
+				</tr>
+				<tr>
+					<td th:text="#{fuel.billNumber}"></td>
+					<td><input th:value="${fuelDetailsBean.billNumber}"
+						type="text" th:field="*{billNumber}" /> <label
+						th:if="${#fields.hasErrors('billNumber')}" th:text="#{error.}"
+						th:class="'error'">Name Error</label></td>
+				</tr>
+				<tr>
+					<td th:text="#{fuel.verifiedBy}"></td>
+					<td><input th:value="${fuelDetailsBean.verifiedBy}"
+						type="text" th:field="*{verifiedBy}" /> <label
+						th:if="${#fields.hasErrors('verifiedBy')}" th:text="#{error.}"
+						th:class="'error'">Name Error</label></td>
+				</tr>
+				<tr>
+					<td colspan="2"><input type="submit"
+						th:value="${fuelDetailsBean.slno!=0}   ? #{user.form.update} : #{user.form.add}" />
+						<input type="reset" th:value="#{user.form.reset}" /></td>
+				</tr>
+			</table>
+		</form>
+	</div>
+	<script type="text/javascript"
+		src="../webjars/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+</body>
+</html>

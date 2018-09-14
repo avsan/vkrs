@@ -2,7 +2,6 @@ package com.avsan.spring.controller;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 import javax.validation.Valid;
 
@@ -11,20 +10,17 @@ import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.avsan.spring.bean.VehicleDetailsBean;
 import com.avsan.spring.pojo.VehicleDetailsPojo;
-//import com.avsan.spring.bean1.VehicleDetailsBean;
-import com.avsan.spring.service.UserService;
 import com.avsan.spring.service.VehicleDetailsService;
 
 @Controller
 public class WelcomeController {
 
 	
-	/*@Autowired
+	@Autowired
 	private VehicleDetailsService vehicleDetailsService;
 	@GetMapping("create-user")
 	public ModelAndView createUserView() {
@@ -60,7 +56,7 @@ public class WelcomeController {
 
         if(result.hasErrors()) {
         	mav.setViewName("welcome");
-    	    mav.addObject("user", VehicleDetailsPojo);
+    	    //mav.addObject("user", VehicleDetailsPojo);
     	   // mav.addObject("allProfiles", getProfiles());
     	    return mav;
         }		
@@ -68,7 +64,7 @@ public class WelcomeController {
 	   // mav.addObject("allUsers", userService.getAllUserArticles());
 	    mav.setViewName("user-info");
 	    return mav;
-    }*/	
+    }
 	private List<String> getProfiles() {
 		List<String> list = new ArrayList<>();
 		list.add("Developer");

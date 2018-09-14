@@ -1,0 +1,101 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>Spring Boot Thymeleaf + Spring Security</title>
+
+<div th:replace="fragments/header :: header-css" />
+
+</head>
+<body>
+	<div class="container">
+		<div th:replace="fragments/header :: header" />
+		<div class="starter-template">
+			<h1>Driver Information</h1>
+		</div>
+		<!-- /.container -->
+		<form action="#"
+			th:action="${insuranceBean.ssno==0} ? @{/insurence/addInsurence} :  @{/insurence/updateInsurence?insuranceId={insuranceId}(insuranceId=${insuranceBean.insuranceId})}"
+			th:object="${insuranceBean}" method="POST">
+			<h1 th:text="#{app.create-user}" th:unless="${insuranceBean!=null}">Create</h1>
+			<h1
+				th:text="${insuranceBean.ssno!=0}? #{user.form.add} : #{app.create-user}">Update</h1>
+			<table>
+				<!-- <tr>
+					<td th:text="#{tyre.insuranceId}"></td>
+					<td><input th:value="${insuranceBean.insuranceId}" type="text"
+						th:field="*{insuranceId}" /> <label
+						th:if="${#fields.hasErrors('insuranceId')}" th:text="#{error.}"
+						th:class="'error'">Id Error</label></td>
+				</tr> -->
+				<tr>
+					<td th:text="#{insurance.insuranceId}"></td>
+					<td><input th:value="${insuranceBean.insuranceId}"
+						type="text" th:field="*{insuranceId}" /> <label
+						th:if="${#fields.hasErrors('insuranceId')}" th:text="#{error.}"
+						th:class="'error'">Name Error</label></td>
+				</tr>
+				<tr>
+					<td th:text="#{insurance.insuranceCompany}"></td>
+					<td><input th:value="${insuranceBean.insuranceCompany}"
+						type="text" th:field="*{insuranceCompany}" /> <label
+						th:if="${#fields.hasErrors('insuranceCompany')}" th:text="#{error.}"
+						th:class="'error'">Name Error</label></td>
+				</tr>
+				<tr>
+					<td th:text="#{insurance.validFrom}"></td>
+					<td><input
+						th:value="${insuranceBean.validFrom}" type="date"
+						th:field="*{validFrom}" /> <label
+						th:if="${#fields.hasErrors('validFrom')}"
+						th:text="#{error.}" th:class="'error'">Id Error</label></td>
+				</tr>
+				<tr>
+					<td th:text="#{insurance.validTo}"></td>
+					<td><input
+						th:value="${insuranceBean.validTo}" type="date"
+						th:field="*{validTo}" /> <label
+						th:if="${#fields.hasErrors('validTo')}"
+						th:text="#{error.}" th:class="'error'">Id Error</label></td>
+				</tr>
+				<tr>
+					<td th:text="#{insurance.premiumPaid}"></td>
+					<td><input th:value="${insuranceBean.premiumPaid}" type="text"
+						th:field="*{premiumPaid}" /> <label
+						th:if="${#fields.hasErrors('premiumPaid')}" th:text="#{error.}"
+						th:class="'error'">Name Error</label></td>
+				</tr>
+				<tr>
+					<td th:text="#{insurance.renewalDate}"></td>
+					<td><input th:value="${insuranceBean.renewalDate}" type="text"
+						th:field="*{renewalDate}" /> <label
+						th:if="${#fields.hasErrors('renewalDate')}" th:text="#{error.}"
+						th:class="'error'">Name Error</label></td>
+				</tr>
+				<tr>
+					<td th:text="#{insurance.certificateNumber}"></td>
+					<td><input th:value="${insuranceBean.certificateNumber}" type="text"
+						th:field="*{certificateNumber}" /> <label
+						th:if="${#fields.hasErrors('certificateNumber')}" th:text="#{error.}"
+						th:class="'error'">Name Error</label></td>
+				</tr>
+				<tr>
+					<td th:text="#{insurance.certificateType}"></td>
+					<td><input th:value="${insuranceBean.certificateType}" type="text"
+						th:field="*{certificateType}" /> <label
+						th:if="${#fields.hasErrors('certificateType')}" th:text="#{error.}"
+						th:class="'error'">Name Error</label></td>
+				</tr>
+				<tr>
+					<td colspan="2"><input type="submit"
+						th:value="${insuranceBean.ssno!=0}  ? #{user.form.update} : #{user.form.add}" />
+						<!--   <input type="submit" th:value="#{user.form.submit}"/>  -->
+						<input type="reset" th:value="#{user.form.reset}" /></td>
+				</tr>
+			</table>
+		</form>
+	</div>
+	<script type="text/javascript"
+		src="../webjars/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+</body>
+</html>

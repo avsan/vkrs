@@ -13,5 +13,6 @@ public interface VehicleDetailsDao {
 	public VehicleDetailsPojo update(VehicleDetailsPojo vehicleDetails, int id);
 	public VehicleDetailsPojo updateCountry(VehicleDetailsPojo vehicleDetails, int id);
 	public void delete(int id);
+	public int findVehicleIdByVehiclePrNumber(String vehiclePrNumber);
 	
 }

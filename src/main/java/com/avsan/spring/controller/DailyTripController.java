@@ -1,69 +1,220 @@
 package com.avsan.spring.controller;
 
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
-@RestController
+import javax.servlet.http.HttpServletResponse;
+import javax.validation.Valid;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
+import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestHeader;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
+
+import com.avsan.spring.bean.DailyTripDetailsBean;
+import com.avsan.spring.bean.ReportBean;
+import com.avsan.spring.pojo.DailyTripDetailsPojo;
+import com.avsan.spring.pojo.DriverDetailsPojo;
+import com.avsan.spring.pojo.VehicleDetailsPojo;
+import com.avsan.spring.service.DailyTripDetailsService;
+import com.avsan.spring.service.DriverDetailsService;
+import com.avsan.spring.service.ExcelOutputServiceImpl;
+import com.avsan.spring.service.VehicleDetailsService;
+
+@Controller
 @RequestMapping(value={"/dailytrip"})
 public class DailyTripController {
-	/*@Autowired
+	@Autowired
 	DailyTripDetailsService dailyTripDetailsService;
 
-    @GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<DailyTripDetailsBean> getDailyTripDetailsBeanById(@PathVariable("id") int id) {
-        System.out.println("Fetching DailyTripDetailsBean with id " + id);
-        DailyTripDetailsBean DailyTripDetailsBean = dailyTripDetailsService.findById(id);
-        if (DailyTripDetailsBean == null) {
-            return new ResponseEntity<DailyTripDetailsBean>(HttpStatus.NOT_FOUND);
-        }
-        return new ResponseEntity<DailyTripDetailsBean>(DailyTripDetailsBean, HttpStatus.OK);
+	@Autowired
+	DriverDetailsService driverDetailsService;
+	
+	@Autowired
+	private VehicleDetailsService vehicleDetailsService;
+	
+	@Autowired
+	private ExcelOutputServiceImpl excelOutputService;
+	
+	private int driverId;
+	private int vehicleId;
+
+	@GetMapping("create-daily-trip")
+	public ModelAndView createUserView() {
+	    ModelAndView mav = new ModelAndView();
+	    mav.setViewName("createDailyTripDetails");
+	    mav.addObject("dailyTripDetailsBean", new DailyTripDetailsBean());
+	    //mav.addObject("allProfiles", getProfiles());
+	    return mav;
     }
-    
-	 @PostMapping(value="/create",headers="Accept=application/json")
-	 public ResponseEntity<Void> createDailyTripDetailsBean(@RequestBody DailyTripDetailsBean DailyTripDetailsBean, UriComponentsBuilder ucBuilder){
-	     //System.out.println("Creating DailyTripDetailsBean "+DailyTripDetailsBean.getName());
-	     dailyTripDetailsService.createDailyTripDetails(DailyTripDetailsBean);
-	     HttpHeaders headers = new HttpHeaders();
-	     headers.setLocation(ucBuilder.path("/dailytrip/{id}").buildAndExpand(DailyTripDetailsBean.getTripId()).toUri());
-	     return new ResponseEntity<Void>(headers, HttpStatus.CREATED);
-	 }
-
-	 @GetMapping(value="/get", headers="Accept=application/json")
-	 public List<DailyTripDetailsBean> getAllDailyTripDetailsBean() {	 
-	  List<DailyTripDetailsBean> tasks=dailyTripDetailsService.getDailyTripDetails();
-	  return tasks;
-	
-	 }
-
-	@PutMapping(value="/update", headers="Accept=application/json")
-	public ResponseEntity<String> updateDailyTripDetailsBean(@RequestBody DailyTripDetailsBean currentDailyTripDetailsBean)
-	{
-		System.out.println("sd");
-	DailyTripDetailsBean DailyTripDetailsBean = dailyTripDetailsService.findById(currentDailyTripDetailsBean.getTripId());
-	if (DailyTripDetailsBean==null) {
-		return new ResponseEntity<String>(HttpStatus.NOT_FOUND);
-	}
-	dailyTripDetailsService.update(currentDailyTripDetailsBean, currentDailyTripDetailsBean.getTripId());
-	return new ResponseEntity<String>(HttpStatus.OK);
-	}
-	
-	@DeleteMapping(value="/{id}", headers ="Accept=application/json")
-	public ResponseEntity<DailyTripDetailsBean> deleteDailyTripDetailsBean(@PathVariable("id") int id){
-		DailyTripDetailsBean DailyTripDetailsBean = dailyTripDetailsService.findById(id);
-		if (DailyTripDetailsBean == null) {
-			return new ResponseEntity<DailyTripDetailsBean>(HttpStatus.NOT_FOUND);
+	@PostMapping("create-daily-trip")
+	public ModelAndView createUser(@Valid DailyTripDetailsBean dailyTripDetailsBean, BindingResult result) {
+		ModelAndView mav = new ModelAndView();
+		if(result.hasErrors()) {
+			
+			  mav.setViewName("createDailyTripDetails");
+			   // mav.addObject("dailyTripDetailsBean", new DailyTripDetailsBean());
+			return mav;
 		}
-		dailyTripDetailsService.deleteDailyTripDetailsById(id);
-		return new ResponseEntity<DailyTripDetailsBean>(HttpStatus.NO_CONTENT);
+	    
+	    DailyTripDetailsPojo dailyTripDetailsPojo=new DailyTripDetailsPojo();
+	    DriverDetailsPojo dp = new DriverDetailsPojo();
+	    
+	    driverId = driverDetailsService.findDriverIdByDriveryLicanceNumber(dailyTripDetailsBean.getDriverId());
+	    dp.setDriverId(driverId);
+	    VehicleDetailsPojo vehicleDetailsPojo =new VehicleDetailsPojo();
+	    
+	    vehicleId = vehicleDetailsService.findVehicleIdByVehiclePrNumber(dailyTripDetailsBean.getVehicleId());
+	    
+	    vehicleDetailsPojo.setVehicleId(vehicleId);
+	    dailyTripDetailsPojo.setDate(dailyTripDetailsBean.getDate());
+	    dailyTripDetailsPojo.setDriverId(dp);
+	    dailyTripDetailsPojo.setLodingPlace(dailyTripDetailsBean.getLodingPlace());
+	    dailyTripDetailsPojo.setLodingMetreReading(dailyTripDetailsBean.getLodingMetreReading());
+	    dailyTripDetailsPojo.setLodingTime(dailyTripDetailsBean.getLodingTime());
+	    dailyTripDetailsPojo.setMaterial(dailyTripDetailsBean.getMaterial());
+	    dailyTripDetailsPojo.setRefuilingAt(dailyTripDetailsBean.getRefuilingAt());
+	   // dailyTripDetailsPojo.setTripId();
+	    dailyTripDetailsPojo.setUnlodingMetreReading(dailyTripDetailsBean.getUnlodingMetreReading());
+	    dailyTripDetailsPojo.setUnlodingPlace(dailyTripDetailsBean.getUnlodingPlace());
+	    dailyTripDetailsPojo.setUnlodingTime(dailyTripDetailsBean.getUnlodingTime());
+	    dailyTripDetailsPojo.setVehicleId(vehicleDetailsPojo);
+	    dailyTripDetailsService.createDailyTripDetails(dailyTripDetailsPojo);
+	    mav.setViewName("user-info");
+	    return mav;
+    }	
+	
+	@PostMapping("updateDailyTrip")
+	public ModelAndView updateDailyTrip(@Valid DailyTripDetailsBean dailyTripDetailsBean,@RequestParam("tripId") int tripId, BindingResult result) {
+	    ModelAndView mav = new ModelAndView();
+	    DailyTripDetailsPojo dailyTripDetailsPojo=new DailyTripDetailsPojo();
+	    DriverDetailsPojo dp = new DriverDetailsPojo();
+	    
+	    driverId = driverDetailsService.findDriverIdByDriveryLicanceNumber(dailyTripDetailsBean.getDriverId());
+	    dp.setDriverId(driverId);
+	    VehicleDetailsPojo vehicleDetailsBean =new VehicleDetailsPojo();
+	    
+	    vehicleId = vehicleDetailsService.findVehicleIdByVehiclePrNumber(dailyTripDetailsBean.getVehicleId());
+	    
+	    vehicleDetailsBean.setVehicleId(vehicleId);
+	    dailyTripDetailsPojo.setDate(dailyTripDetailsBean.getDate());
+	    dailyTripDetailsPojo.setDriverId(dp);
+	    dailyTripDetailsPojo.setLodingPlace(dailyTripDetailsBean.getLodingPlace());
+	    dailyTripDetailsPojo.setLodingMetreReading(dailyTripDetailsBean.getLodingMetreReading());
+	    dailyTripDetailsPojo.setLodingTime(dailyTripDetailsBean.getLodingTime());
+	    dailyTripDetailsPojo.setMaterial(dailyTripDetailsBean.getMaterial());
+	    dailyTripDetailsPojo.setRefuilingAt(dailyTripDetailsBean.getRefuilingAt());
+	   // dailyTripDetailsPojo.setTripId();
+	    dailyTripDetailsPojo.setUnlodingMetreReading(dailyTripDetailsBean.getUnlodingMetreReading());
+	    dailyTripDetailsPojo.setUnlodingPlace(dailyTripDetailsBean.getUnlodingPlace());
+	    dailyTripDetailsPojo.setUnlodingTime(dailyTripDetailsBean.getUnlodingTime());
+	    dailyTripDetailsPojo.setVehicleId(vehicleDetailsBean);
+	    dailyTripDetailsService.update(dailyTripDetailsPojo, tripId);
+	    mav.setViewName("user-info");
+	    return mav;
+    }	
+	
+	@GetMapping("updateDailyTrip")
+	 public ModelAndView viewUpdateDailyTrip(@RequestParam("tripId") int tripId) {	 
+	  DailyTripDetailsPojo dailyTripDetailsPojo = dailyTripDetailsService.findById(tripId);
+
+		  DailyTripDetailsBean dailyTripDetailsBean =new DailyTripDetailsBean();
+		  dailyTripDetailsBean.setDate(dailyTripDetailsPojo.getDate());
+		  dailyTripDetailsBean.setDriverId(dailyTripDetailsPojo.getDriverId().getDriverName());
+		  dailyTripDetailsBean.setLodingMetreReading(dailyTripDetailsPojo.getLodingMetreReading());
+		  dailyTripDetailsBean.setLodingPlace(dailyTripDetailsPojo.getLodingPlace());
+		  dailyTripDetailsBean.setLodingTime(dailyTripDetailsPojo.getLodingTime());
+		  dailyTripDetailsBean.setMaterial(dailyTripDetailsPojo.getMaterial());
+		  dailyTripDetailsBean.setRefuilingAt(dailyTripDetailsPojo.getRefuilingAt());
+		  dailyTripDetailsBean.setTripId(dailyTripDetailsPojo.getTripId());
+		  dailyTripDetailsBean.setUnlodingMetreReading(dailyTripDetailsPojo.getUnlodingMetreReading());
+		  dailyTripDetailsBean.setUnlodingPlace(dailyTripDetailsPojo.getUnlodingPlace());
+		  dailyTripDetailsBean.setUnlodingTime(dailyTripDetailsPojo.getUnlodingTime());
+		  dailyTripDetailsBean.setVehicleId(dailyTripDetailsPojo.getVehicleId().getVehiclePrNumber());
+		
+		  ModelAndView mav = new ModelAndView();
+		  mav.setViewName("createDailyTripDetails");
+		    mav.addObject("dailyTripDetailsBean", dailyTripDetailsBean);
+	    //mav.addObject("allProfiles", getProfiles());
+	    return mav;
+	}
+	@GetMapping("viewDailyTrip")
+	 public ModelAndView getAllDailyTripDetails() {	 
+	  List<DailyTripDetailsPojo> listDailyTripDetails = dailyTripDetailsService.getDailyTripDetails();
+	  List<DailyTripDetailsBean> listDailyTripDetailsBean=new ArrayList<>();
+	 // vehicleDetails.forEach(vehicle-> );
+	  for(DailyTripDetailsPojo dailyTripDetailsPojo:listDailyTripDetails) {
+		  DailyTripDetailsBean dailyTripDetailsBean =new DailyTripDetailsBean();
+		  dailyTripDetailsBean.setDate(dailyTripDetailsPojo.getDate());
+		  dailyTripDetailsBean.setDriverId(dailyTripDetailsPojo.getDriverId().getDriverName());
+		  dailyTripDetailsBean.setLodingMetreReading(dailyTripDetailsPojo.getLodingMetreReading());
+		  dailyTripDetailsBean.setLodingPlace(dailyTripDetailsPojo.getLodingPlace());
+		  dailyTripDetailsBean.setLodingTime(dailyTripDetailsPojo.getLodingTime());
+		  dailyTripDetailsBean.setMaterial(dailyTripDetailsPojo.getMaterial());
+		  dailyTripDetailsBean.setRefuilingAt(dailyTripDetailsPojo.getRefuilingAt());
+		  dailyTripDetailsBean.setTripId(dailyTripDetailsPojo.getTripId());
+		  dailyTripDetailsBean.setUnlodingMetreReading(dailyTripDetailsPojo.getUnlodingMetreReading());
+		  dailyTripDetailsBean.setUnlodingPlace(dailyTripDetailsPojo.getUnlodingPlace());
+		  dailyTripDetailsBean.setUnlodingTime(dailyTripDetailsPojo.getUnlodingTime());
+		  dailyTripDetailsBean.setVehicleId(dailyTripDetailsPojo.getVehicleId().getVehiclePrNumber());
+		  listDailyTripDetailsBean.add(dailyTripDetailsBean);
+	  }
+
+	  ModelAndView mav = new ModelAndView();
+	    mav.setViewName("viewDailyTripDetails");
+	    mav.addObject("dailyTripDetailsBean", listDailyTripDetailsBean);
+	    //mav.addObject("allProfiles", getProfiles());
+	    return mav;
 	}
 	
-	@PatchMapping(value="/{id}", headers="Accept=application/json")
-	public ResponseEntity<DailyTripDetailsBean> updateDailyTripDetailsBeanPartially(@PathVariable("id") int id, @RequestBody DailyTripDetailsBean currentDailyTripDetailsBean){
-		DailyTripDetailsBean DailyTripDetailsBean = dailyTripDetailsService.findById(id);
-		if(DailyTripDetailsBean ==null){
-			return new ResponseEntity<DailyTripDetailsBean>(HttpStatus.NOT_FOUND);
+
+		
+	@RequestMapping(value="/download", method=RequestMethod.GET)
+	public void downloadExcelOutputExl(HttpServletResponse response, @RequestHeader HttpHeaders rawHeaders){
+
+		  List<DailyTripDetailsPojo> listDailyTripDetails = dailyTripDetailsService.getDailyTripDetails();
+	
+		try {
+			excelOutputService.createExcelOutputFile(listDailyTripDetails,response);
+		} catch (IOException e) {
+			//logger.error(": IOException :", e);
 		}
-		DailyTripDetailsBean usr =	dailyTripDetailsService.updatePartially(currentDailyTripDetailsBean, id);
-		return new ResponseEntity<DailyTripDetailsBean>(usr, HttpStatus.OK);
-	}*/
+		//excelOutputService.createExcelOutputFile(implementerTaskboardDTOs,response);
+	}
+	@PostMapping("viewDailyTrip1")
+	 public ModelAndView getAllDailyTripDetails(@Valid ReportBean reportBean) {	 
+	  List<DailyTripDetailsPojo> listDailyTripDetails = dailyTripDetailsService.getDailyTripDetailsByDate(reportBean.getFromDate(),reportBean.getToDate());
+	  List<DailyTripDetailsBean> listDailyTripDetailsBean=new ArrayList<>();
+	 // vehicleDetails.forEach(vehicle-> );
+	  for(DailyTripDetailsPojo dailyTripDetailsPojo:listDailyTripDetails) {
+		  DailyTripDetailsBean dailyTripDetailsBean =new DailyTripDetailsBean();
+		  dailyTripDetailsBean.setDate(dailyTripDetailsPojo.getDate());
+		  dailyTripDetailsBean.setDriverId(dailyTripDetailsPojo.getDriverId().getDriverName());
+		  dailyTripDetailsBean.setLodingMetreReading(dailyTripDetailsPojo.getLodingMetreReading());
+		  dailyTripDetailsBean.setLodingPlace(dailyTripDetailsPojo.getLodingPlace());
+		  dailyTripDetailsBean.setLodingTime(dailyTripDetailsPojo.getLodingTime());
+		  dailyTripDetailsBean.setMaterial(dailyTripDetailsPojo.getMaterial());
+		  dailyTripDetailsBean.setRefuilingAt(dailyTripDetailsPojo.getRefuilingAt());
+		  dailyTripDetailsBean.setTripId(dailyTripDetailsPojo.getTripId());
+		  dailyTripDetailsBean.setUnlodingMetreReading(dailyTripDetailsPojo.getUnlodingMetreReading());
+		  dailyTripDetailsBean.setUnlodingPlace(dailyTripDetailsPojo.getUnlodingPlace());
+		  dailyTripDetailsBean.setUnlodingTime(dailyTripDetailsPojo.getUnlodingTime());
+		  dailyTripDetailsBean.setVehicleId(dailyTripDetailsPojo.getVehicleId().getVehiclePrNumber());
+		  listDailyTripDetailsBean.add(dailyTripDetailsBean);
+	  }
+
+	  ModelAndView mav = new ModelAndView();
+	    mav.setViewName("viewDailyTripDetails");
+	    mav.addObject("dailyTripDetailsBean", listDailyTripDetailsBean);
+	    //mav.addObject("allProfiles", getProfiles());
+	    return mav;
+	}
 }
